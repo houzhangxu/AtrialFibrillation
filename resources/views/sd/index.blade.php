@@ -9,24 +9,6 @@
 @stop
 
 @section("style")
-    <!-- BEGIN PAGE LEVEL STYLES -->
-
-    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-    <link rel="" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
-
-
-    <!-- END PAGE LEVEL STYLES -->
-
-    <link rel="shortcut icon" href="media/image/favicon.ico" />
-    <style>
-        .table-button{
-            width: 50px;
-            margin-right: 5px;
-            border-radius: 5px;
-        }
-
-    </style>
 @stop
 
 @section("sidebar")
@@ -68,9 +50,11 @@
 
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form action="{{ url("sd/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
+                    <form id="oForm" action="{{ url("sd/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="Form[pid]" value="{{ $patient_info->id }}" />
+                        <input type="hidden" name="Form[id_card]" value="{{ $patient_info->id_card }}" />
+
                         <div class="control-group">
 
                             <label class="control-label">姓名</label>
@@ -279,7 +263,40 @@
 
             });
 
+            var oForm = Hmodal.form({
+                id: "#oForm",
+                messages: {
+                    "Form[drink]": {
+                        required: '喝酒史不能为空'
+                    },
+                    "Form[smoke]": {
+                        required: '吸烟史不能为空'
+                    },
+                    "Form[ml]": {
+                        required: '喝酒量不能为空'
+                    },
+                    "Form[drink_type]":{
+                        required:'品种不能为空'
+                    }
+                },
+                rules: {
+                    "Form[drink]"	  : {
+                        required: true
+                    },
+                    "Form[smoke]"	  : {
+                        required: true
+                    },
+                    "Form[ml]": {
+                        required:true
+                    },
+                    "Form[drink_type]":{
+                        required: true
+                    }
+                }
+
+            });
         });
+
 
     </script>
 @stop

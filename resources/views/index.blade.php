@@ -11,14 +11,11 @@
 @section("style")
     <!-- BEGIN PAGE LEVEL STYLES -->
 
-    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-    <link rel="" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
-
+    <link rel="" type="text/css" href=http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset("media/css/DT_bootstrap.css") }}" />
 
     <!-- END PAGE LEVEL STYLES -->
 
-    <link rel="shortcut icon" href="media/image/favicon.ico" />
     <style>
         .table-button{
             width: 50px;
@@ -118,7 +115,7 @@
                     { "mData": "name","sTitle": "姓名",  "sDefaultContent": "无", "bSortable": true,
                         "mRender": function(data, type, full){
                             //alert(type);
-                            return '<a href="{{ url("/family") }}?uid='+full.id+'">'+data+'</a>';
+                            return '<a href="{{ url("/family") }}?uid='+full.id+'&id_card='+full.id_card+'">'+data+'</a>';
                         }
                     },
                     { "mData": "id_card","sTitle": "身份证",  "sDefaultContent": "无", "bSortable": true },

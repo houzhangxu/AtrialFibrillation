@@ -38,7 +38,7 @@ var Hmodal = function (){
         return $modal;
 
     };
-    var form = function (a) {
+    var formD = function (a) {
         function b(e) {
             if (typeof e.id != "string") {
                 throw new UndefinedException("表单ID不能为空")
@@ -218,12 +218,12 @@ var Hmodal = function (){
             errorPlacement: function(error, element) {
                 if (element.attr("type") == "checkbox") {
                     error.insertAfter(element.closest(".controls"))
-                } else {
-                    if (element.attr("type") == "radio") {
-                        error.insertAfter(element.closest(".controls"))
-                    } else {
-                        error.insertAfter(element)
-                    }
+                } else if (element.attr("type") == "radio"){
+                    error.insertAfter(element.closest(".controls"))
+                }else if(element.parent().hasClass("input-append")){
+                    element.parent().parent().append(error);
+                }else {
+                    error.insertAfter(element)
                 }
             },
 
@@ -269,31 +269,89 @@ var Hmodal = function (){
                         }else{
                             toastr.error("服务器错误,请联系管理员.");
                         }
-                        /*
-                        if (l && typeof l == "function") {
-                            l(q)
-                        }
-                        if (typeof e.autotip != "boolean" || e.autotip) {
-                            //messager.alert("提&#8194;示", q.message,
-                            //    function() {
-                            //        m(q)
-                            //    })
-
-                            alert("提示:" + q.message);
-                            m(q);
-                        } else {
-                            m(q)
-                        }
-                        if (n && typeof n == "function") {
-                            n(q)
-                        }
-                        */
                     },
                     error: function(r, s, q) {
                         toastr.error("提交数据出现错误,请联系管理员.");
                         // alert("出错了");
                     }
                 })
+            }
+        });
+
+        return oForm;
+    };
+
+    var form = function (form_config) {
+
+        var oForm = $(form_config.id);
+
+        var success1 = $('<div class="alert alert-success hide"><button class="close" data-dismiss="alert"></button>验证成功. </div>');
+        var error1 = $('<div class="alert alert-error hide"><button class="close" data-dismiss="alert"></button>验证失败. </div>');
+
+        oForm.prepend(error1);
+        oForm.prepend(success1);
+
+        oForm.validate({
+            errorElement: 'span', //default input error message container
+            errorClass: 'help-block help-block-h', // default input error message class
+            focusInvalid: false, // do not focus the last invalid input
+            ignore: "",
+            rules: form_config["rules"],
+            messages: form_config["messages"],
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                success1.hide();
+                error1.show();
+                toastr.error("验证失败,请检查数据.");
+                App.scrollTo(error1, -200);
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("type") == "checkbox") {
+                    // error.insertAfter()
+                    element.closest(".controls").append(error);
+                } else if(element.attr("type") == "radio"){
+                    //error.insertAfter(element.closest(".controls"))
+                    element.closest(".controls").append(error);
+                }else if(element.parent().hasClass("input-append")){
+                    element.parent().parent().append(error);
+                }else{
+                    error.insertAfter(element)
+                }
+            },
+
+            highlight: function (element) { // hightlight error inputs
+                $(element)
+                    .closest('.help-inline').removeClass('ok'); // display OK icon
+                $(element)
+                    .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
+            },
+
+            unhighlight: function (element) { // revert the change dony by hightlight
+                $(element)
+                    .closest('.control-group').removeClass('error'); // set error class to the control group
+                //$(element).removeClass("help-block");
+            },
+
+            success: function (label,element) {
+                console.log(label);
+
+                if(element.closest(".input-append")){
+                    console.log("I am input append");
+                    label
+                        .addClass('valid').addClass('help-inline help-inline-h ok') // mark the current input as valid and display OK icon
+                        .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
+                }else{
+                    console.log("I am not input append");
+                    label
+                        .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
+                        .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
+                }
+            },
+
+            submitHandler: function (form) {
+                success1.show();
+                error1.hide();
+                form.submit();
             }
         });
 
@@ -364,8 +422,8 @@ var Hmodal = function (){
         dialog:function (config){
             return dialog(config);
         },
-        form:function (a) {
-            return form(a);
+        form:function (form_config) {
+            return form(form_config);
         },
         formAJAX: function (form_config) {
             return formAJAX(form_config);

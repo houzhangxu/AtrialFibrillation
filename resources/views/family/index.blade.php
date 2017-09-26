@@ -9,24 +9,6 @@
 @stop
 
 @section("style")
-    <!-- BEGIN PAGE LEVEL STYLES -->
-
-    <link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-    <link rel="" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="media/css/DT_bootstrap.css" />
-
-
-    <!-- END PAGE LEVEL STYLES -->
-
-    <link rel="shortcut icon" href="media/image/favicon.ico" />
-    <style>
-        .table-button{
-            width: 50px;
-            margin-right: 5px;
-            border-radius: 5px;
-        }
-
-    </style>
 @stop
 
 @section("sidebar")
@@ -71,6 +53,7 @@
                     <form action="{{ url("family/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="Family[pid]" value="{{ $patient_info->id }}" />
+                        <input type="hidden" name="Family[id_card]" value="{{ $patient_info->id_card }}" />
                         <div class="control-group">
 
                             <label class="control-label">姓名</label>

@@ -60,7 +60,7 @@ class PatientInfoController extends Controller
     public function create(Request $request){
         if($request->isMethod("POST")){
             $patient_info = $request->input("PatientInfo");
-            $patient_info["admission_time"] = time();       //入组时间
+            $patient_info["admission_time"] = strtotime($patient_info["admission_time"]);       //入组时间
             $patient_info["birth_date"] = strtotime($patient_info["birth_date"]);     //出生日期
             $data["code"] = 0;
             if(PatientInfo::create($patient_info)){

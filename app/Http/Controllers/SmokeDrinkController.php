@@ -36,17 +36,22 @@ class SmokeDrinkController extends Controller
         if($request->isMethod("POST")){
             $form = $request->input("Form");
             $pid = $form["pid"];
+            $id_card = $form["id_card"];
 
-            if(SmokeDrink::where("pid",$pid)->count()){
-                if(SmokeDrink::where("pid",$pid)->update($form)){
-                    return redirect("/sd?uid=".$pid)->with("result",["code"=>1,"message"=>"修改成功!"]);
+            dump($form);
+            dump($pid);
+            
+            die;
+            if(SmokeDrink::where("id_card",$id_card)->count()){
+                if(SmokeDrink::where("id_card",$id_card)->update($form)){
+                    return redirect("/sd?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
                 }else{
                     return redirect()->back()->with("result",["code"=>0,"message"=>"修改失败!"]);
                 }
             }
 
             if(SmokeDrink::create($form)){
-                return redirect("/sd?uid=".$pid)->with("result",["code"=>1,"message"=>"创建成功!"]);
+                return redirect("/sd?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
             }else{
                 return redirect()->back()->with("result",["code"=>0,"message"=>"创建失败!"]);
             }

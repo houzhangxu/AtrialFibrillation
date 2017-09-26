@@ -1,5 +1,4 @@
 <div class="form-horizontal form-view">
-    {{ dump($patient_info["MOCA"]) }}
     <div class="row-fluid">
         <div class="span6 ">
 
@@ -64,6 +63,26 @@
                 <div class="controls">
 
                     <span class="text">{{ $patient_info["intervention_num"] }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label" for="lastName">入组时间:</label>
+
+                <div class="controls">
+
+                    <span class="text">{{ isset($patient_info["admission_time"]) ? date("Y-m-d",$patient_info["admission_time"]) : "无" }}</span>
 
                 </div>
 
@@ -181,7 +200,7 @@
 
                 <div class="controls">
 
-                    <span class="text">{{ $patient_info["birth_day"] ? date("Y-m-d",$patient_info["birth_date"]) :"无" }}</span>
+                    <span class="text">{{ isset($patient_info["birth_date"]) && $patient_info["birth_date"]!=0 ? date("Y-m-d",$patient_info["birth_date"]) : "无" }}</span>
 
                 </div>
 

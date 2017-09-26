@@ -73,6 +73,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("media/css/datetimepicker.css") }}" />
     <!-- 时间日期控件结束 -->
 
+    <!-- select2开始 -->
+    <link rel="stylesheet" type="text/css" href="{{ asset("media/css/select2_metro.css") }}" />
+    <!-- select2开始 -->
+
+    <!-- 自有css开始 -->
+    <link rel="stylesheet" type="text/css" href="{{ asset("media/css/h.css") }}" />
+    <!-- 自有css结束 -->
+
     @section("style")
 
     @show
@@ -192,17 +200,23 @@
 
                     <span class="title">@yield("patient-name")</span>
 
-                    <span class="arrow "></span>
+                    <span class="arrow open"></span>
 
                 </a>
 
                 <ul class="sub-menu"><!-- 二级菜单 -->
 
                     <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)) }}" >家族史</a>
+                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >家族史</a>
                     </li>
                     <li class="{{ Request::getPathInfo() == "/sd" ?"active" : "" }}">
-                        <a href="{{ url("/sd?uid=".Request::input("uid",0)) }}" >抽烟喝酒</a>
+                        <a href="{{ url("/sd?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >抽烟喝酒</a>
+                    </li>
+                    <li>
+                        <a href="#">高血压</a>
+                    </li>
+                    <li>
+                        <a href="#">冠心病</a>
                     </li>
 
                 </ul>

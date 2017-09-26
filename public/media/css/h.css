@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.help-block-h
+{
+    margin-left: 2px;
+}
+.help-block.help-block-h
+{
+    margin-top: 0px;
+}
+.help-inline-h{
+    margin-left: 28px;
+}

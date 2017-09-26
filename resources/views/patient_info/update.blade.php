@@ -106,6 +106,28 @@
 
             <div class="control-group">
 
+                <label class="control-label"><span class="required">*</span> 入组时间</label>
+
+                <div class="controls">
+                    <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd" data-date-viewmode="years" data-date-minviewmode="months">
+
+                        <input class="m-wrap m-ctrl-medium date-picker" name="PatientInfo[admission_time]" readonly size="16" type="text" value="{{ date("Y-m-d",$patient_info["admission_time"]) }}" /><span class="add-on"><i class="icon-calendar"></i></span>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
                 <label class="control-label">手册</label>
 
                 <div class="controls">
@@ -615,11 +637,14 @@
             "PatientInfo[hospital_number]":{
                 required: '住院号不能为空'
             },
-            "PatientInfo[birth_day]":{
+            "PatientInfo[birth_date]":{
                 required: '出生日期不能为空'
             },
             "PatientInfo[phone1]":{
                 required: '联系方式1不能为空'
+            },
+            "PatientInfo[admission_time]":{
+                required: '入组时间不能为空'
             }
         },
         rules: {
@@ -634,8 +659,9 @@
             "PatientInfo[fibrillation]":{required:true},
             "PatientInfo[intervention_num]":{required:true},
             "PatientInfo[hospital_number]":{required:true},
-            "PatientInfo[birth_day]":{required:true},
-            "PatientInfo[phone1]":{required:true}
+            "PatientInfo[birth_date]":{required:true},
+            "PatientInfo[phone1]":{required:true},
+            "PatientInfo[admission_time]":{required:true}
         }
     });
 </script>

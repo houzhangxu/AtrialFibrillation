@@ -36,17 +36,18 @@ class FamilyHistoryController extends Controller
         if($request->isMethod("POST")){
             $family = $request->input("Family");
             $pid = $family["pid"];
+            $id_card = $family["id_card"];
 
-            if(FamilyHistory::where("pid",$pid)->count()){
-                if(FamilyHistory::where("pid",$pid)->update($family)){
-                    return redirect("/family?uid=".$pid)->with("result",["code"=>1,"message"=>"修改成功!"]);
+            if(FamilyHistory::where("id_card",$id_card)->count()){
+                if(FamilyHistory::where("id_card",$id_card)->update($family)){
+                    return redirect("/family?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
                 }else{
                     return redirect()->back()->with("result",["code"=>0,"message"=>"修改失败!"]);
                 }
             }
 
             if(FamilyHistory::create($family)){
-                return redirect("/family?uid=".$pid)->with("result",["code"=>1,"message"=>"创建成功!"]);
+                return redirect("/family?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
             }else{
                 return redirect()->back()->with("result",["code"=>0,"message"=>"创建失败!"]);
             }
