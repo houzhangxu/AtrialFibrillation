@@ -111,6 +111,13 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/option/{name}/{key?}","SmokeDrinkController@option");           //创建页面与添加数据请求
     });
 
+    Route::group(["prefix"=>"hypertension"],function (){
+        Route::any("/","HypertensionController@index");                                   //创建页面与添加数据请求
+        Route::any("/create","HypertensionController@create");                            //创建页面与添加数据请求
+        Route::any("/option/{name}/{key?}","HypertensionController@option");           //创建页面与添加数据请求
+    });
+
+
 
 });
 

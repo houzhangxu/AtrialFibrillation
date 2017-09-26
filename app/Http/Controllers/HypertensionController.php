@@ -2,18 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: 章旭
- * Date: 2017/9/24
- * Time: 23:34
+ * Date: 2017/9/26
+ * Time: 23:04
  */
 
 namespace App\Http\Controllers;
 
-use App\PatientInfo;
 
-use App\SmokeDrink;
-use Illuminate\Http\Request;
-
-class SmokeDrinkController extends Controller
+class HypertensionController extends Controller
 {
 
     public function index(Request $request){
@@ -63,6 +59,4 @@ class SmokeDrinkController extends Controller
 
         return $data;
     }
-
-
 }

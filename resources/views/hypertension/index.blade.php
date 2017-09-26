@@ -20,17 +20,17 @@
 @stop
 
 @section("content-title")
-    抽烟喝酒
+    高血压
 @stop
 
 @section("content-title-more")
-    抽烟喝酒详细信息
+    高血压详细信息
 @stop
 
 @section("breadcrumb-li")
     <li>
         <i class="icon-angle-right"></i>
-        <a href="#">抽烟喝酒</a>
+        <a href="{{ url("") }}">高血压</a>
     </li>
 @stop
 
