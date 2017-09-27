@@ -118,6 +118,8 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/","HypertensionController@index");
         Route::any("/create","HypertensionController@create");
         Route::any("/option/{name}/{key?}","HypertensionController@option");
+        Route::any("/measure","HypertensionController@measure");
+        Route::any("/measure/create","HypertensionController@measureCreate");
     });
 
     //冠心病

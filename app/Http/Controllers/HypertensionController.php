@@ -10,8 +10,10 @@ namespace App\Http\Controllers;
 
 
 use App\Hypertension;
+use App\HypertensionMeasure;
 use App\PatientInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HypertensionController extends Controller
 {   //高血压控制器
@@ -63,4 +65,46 @@ class HypertensionController extends Controller
 
         return $data;
     }
+
+    public function measure(Request $request){
+        $id = $request->input("uid",0);     //获取链接中的id,病人id
+        $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
+        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $measures = HypertensionMeasure::where("id_card",$id_card)->get();
+
+        return view("hypertension.measure",[
+            "patient_info"=>$patient_info,
+            "measures"=>$measures
+        ]);
+    }
+
+    public function measureCreate(Request $request){
+
+        if($request->isMethod("Post")){
+            $data["code"] = 1;
+            $data["message"] = "";
+
+            $measur = $request->input("Measure");
+            $measur["measure_time"] = strtotime($measur["measure_time"]);
+
+            if(HypertensionMeasure::create($measur)){
+                $data["code"] = 1;
+                $data["message"] = "添加成功";
+            }
+            Session::flash("result",$data);
+
+            return $data;
+        }
+
+        $id = $request->input("uid",0);     //获取链接中的id,病人id
+        $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
+        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $measures = HypertensionMeasure::where("id_card",$id_card)->get();
+
+        return view("hypertension.measure_create",[
+            "patient_info"=>$patient_info
+        ]);
+    }
+
+
 }

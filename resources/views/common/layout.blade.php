@@ -192,7 +192,7 @@
                 <div style="margin-top:5px;"></div>
             </li>
 
-            <li class="active"><!-- 侧边栏单个选择项 -->
+            <li class="{{ !strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
 
                 <a href="javascript:;">
 
@@ -229,6 +229,27 @@
 
             </li>
 
+            <li class="{{ strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
+
+                <a href="javascript:;">
+
+                    <i class="icon-file-text"></i>
+
+                    <span class="title">走访</span>
+
+                    <span class="arrow"></span>
+
+                </a>
+
+                <ul class="sub-menu"><!-- 二级菜单 -->
+
+                    <li class="{{ Request::getPathInfo() == "/hypertension/measure" ?"active" : "" }}">
+                        <a href="{{ url("/hypertension/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >高血压</a>
+                    </li>
+
+                </ul>
+
+            </li>
 
         </ul>
 

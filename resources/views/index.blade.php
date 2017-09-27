@@ -214,7 +214,7 @@
                 title: "修改病人信息",
                 width: 800,
                 buttons: [
-                    { inner: "保存", className: "btn blue",    click: function() {
+                    { inner: "保存", className: "btn blue",click: function() {
                         oForm_update.submit();
                         oTable.fnDraw();
                     } },

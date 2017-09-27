@@ -177,6 +177,7 @@ var Hmodal = function (){
     var formAJAX = function (form_config){
 
         var oForm = $(form_config.id);
+        var flashPage = typeof(form_config.flash) != "undefined" && form_config.flash == true ? true : false;
 
         //oForm.find("select, input:checkbox, input:radio, input:file").uniform();
         oForm.find("input:checkbox, input:radio, input:file").uniform();
@@ -195,6 +196,11 @@ var Hmodal = function (){
                 showMeridian: false
             });
         }
+
+        oForm.find(".form_datetime").datetimepicker({
+            format: "yyyy-mm-dd hh:ii",
+            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+        });
 
         var success1 = $('<div class="alert alert-success hide"><button class="close" data-dismiss="alert"></button>验证成功. </div>');
         var error1 = $('<div class="alert alert-error hide"><button class="close" data-dismiss="alert"></button>验证失败. </div>');
@@ -263,7 +269,11 @@ var Hmodal = function (){
                     success: function(result) {
                         if(result.code == 1){
                             $("#ajax-modal").modal('hide');
-                            toastr.success(result.message);
+                            if(flashPage){
+                                location.reload();
+                            }else{
+                                toastr.success(result.message);
+                            }
                         }else if(result.code == 0){
                             toastr.error(result.message);
                         }else{
