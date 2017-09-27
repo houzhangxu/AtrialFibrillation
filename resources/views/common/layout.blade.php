@@ -212,8 +212,8 @@
                     <li class="{{ Request::getPathInfo() == "/sd" ?"active" : "" }}">
                         <a href="{{ url("/sd?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >抽烟喝酒</a>
                     </li>
-                    <li>
-                        <a href="#">高血压</a>
+                    <li class="{{ Request::getPathInfo() == "/hypertension" ?"active" : "" }}">
+                        <a href="{{ url("/hypertension?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">高血压</a>
                     </li>
                     <li>
                         <a href="#">冠心病</a>

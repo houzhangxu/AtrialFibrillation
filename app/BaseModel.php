@@ -13,8 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+    protected $UN = "未知";
 
-    public function option($ind = null,$filed = null){  //通用获取选项方法
+    public function option($ind = -1,$filed = null){  //通用获取选项方法
+        if($filed == null){
+            return $this->UN;
+        }
+
         if($ind != -1){
             return array_key_exists($ind,$this->$filed) ? $this->$filed[$ind] : $this->UN;
         }

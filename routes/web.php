@@ -99,18 +99,21 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/detail/{id}","PatientInfoController@detail");       //前端控制详情
     });
 
+    //家庭史
     Route::group(["prefix"=>"family"],function (){
         Route::any("/","FamilyHistoryController@index");                            //创建页面与添加数据请求
         Route::any("/create","FamilyHistoryController@create");                     //创建页面与添加数据请求
         Route::any("/option/{name}/{key?}","FamilyHistoryController@option");       //创建页面与添加数据请求
     });
 
+    //抽烟喝酒
     Route::group(["prefix"=>"sd"],function (){
         Route::any("/","SmokeDrinkController@index");                                   //创建页面与添加数据请求
         Route::any("/create","SmokeDrinkController@create");                            //创建页面与添加数据请求
         Route::any("/option/{name}/{key?}","SmokeDrinkController@option");           //创建页面与添加数据请求
     });
 
+    //高血压
     Route::group(["prefix"=>"hypertension"],function (){
         Route::any("/","HypertensionController@index");                                   //创建页面与添加数据请求
         Route::any("/create","HypertensionController@create");                            //创建页面与添加数据请求

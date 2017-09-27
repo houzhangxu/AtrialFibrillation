@@ -13,7 +13,8 @@ use App\PatientInfo;
 use Illuminate\Http\Request;
 
 class PatientInfoController extends Controller
-{
+{   //病人信息控制器
+
     public function index(){
         return view("index");
     }

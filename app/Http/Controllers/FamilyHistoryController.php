@@ -14,7 +14,7 @@ use App\PatientInfo;
 use Illuminate\Http\Request;
 
 class FamilyHistoryController extends Controller
-{
+{   //家族史控制器
 
     public function index(Request $request){
         $id = $request->input("uid",0);     //获取链接中的id,病人id

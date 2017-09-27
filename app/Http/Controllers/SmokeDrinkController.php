@@ -14,7 +14,7 @@ use App\SmokeDrink;
 use Illuminate\Http\Request;
 
 class SmokeDrinkController extends Controller
-{
+{   //抽烟喝酒控制器
 
     public function index(Request $request){
         $id = $request->input("uid",0);     //获取链接中的id,病人id

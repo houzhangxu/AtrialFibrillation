@@ -46,7 +46,7 @@ class Hypertension extends BaseModel
         2=>"否"
     ];
 
-    protected $_ACEI_VARIETIES = [    //ACEI类型
+    protected $ACEI_VARIETIES = [    //ACEI类型
         1=>"培哚普利",
         2=>"依那普利"
     ];
@@ -56,7 +56,7 @@ class Hypertension extends BaseModel
         2=>"否"
     ];
 
-    protected $_ARB_VARIETIES = [    //ARB品种
+    protected $ARB_VARIETIES = [    //ARB品种
         1=>"氯沙坦",
         2=>"厄贝沙坦",
         3=>"缬沙坦"

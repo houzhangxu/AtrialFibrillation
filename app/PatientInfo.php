@@ -19,8 +19,6 @@ class PatientInfo extends BaseModel{
         "body_weight","abdominal_circumference","BMI","MOCA"
     ];    //指定允许批量赋值的字段
 
-    private $UN = "未知";
-
     public $timestamps = true;   //维护时间戳
 
     protected $SEX = [    //性别
