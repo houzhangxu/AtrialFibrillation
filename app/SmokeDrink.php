@@ -9,7 +9,7 @@
 namespace App;
 
 class SmokeDrink extends BaseModel
-{
+{   //抽烟喝酒
     protected $table = "smoke_drink";   //指定表名
     protected $primaryKey = "id";   //指定主键
 

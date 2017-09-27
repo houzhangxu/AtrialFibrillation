@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+
+    public $timestamps = true;   //维护时间戳
+
     protected $UN = "未知";
 
     public function option($ind = -1,$filed = null){  //通用获取选项方法

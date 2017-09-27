@@ -10,7 +10,7 @@ namespace App;
 
 
 class FamilyHistory extends BaseModel
-{
+{   //家庭史
     protected $table = "family_history";   //指定表名
     protected $primaryKey = "id";   //指定主键
 

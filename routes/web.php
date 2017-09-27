@@ -108,18 +108,38 @@ Route::group(["middleware"=>["web"]],function (){
 
     //抽烟喝酒
     Route::group(["prefix"=>"sd"],function (){
-        Route::any("/","SmokeDrinkController@index");                                   //创建页面与添加数据请求
-        Route::any("/create","SmokeDrinkController@create");                            //创建页面与添加数据请求
-        Route::any("/option/{name}/{key?}","SmokeDrinkController@option");           //创建页面与添加数据请求
+        Route::any("/","SmokeDrinkController@index");
+        Route::any("/create","SmokeDrinkController@create");
+        Route::any("/option/{name}/{key?}","SmokeDrinkController@option");
     });
 
     //高血压
     Route::group(["prefix"=>"hypertension"],function (){
-        Route::any("/","HypertensionController@index");                                   //创建页面与添加数据请求
-        Route::any("/create","HypertensionController@create");                            //创建页面与添加数据请求
-        Route::any("/option/{name}/{key?}","HypertensionController@option");           //创建页面与添加数据请求
+        Route::any("/","HypertensionController@index");
+        Route::any("/create","HypertensionController@create");
+        Route::any("/option/{name}/{key?}","HypertensionController@option");
     });
 
+    //冠心病
+    Route::group(["prefix"=>"CoronaryHeartDisease"],function (){
+        Route::any("/","CoronaryHeartDiseaseController@index");
+        Route::any("/create","CoronaryHeartDiseaseController@create");
+        Route::any("/option/{name}/{key?}","CoronaryHeartDiseaseController@option");
+    });
+
+    //脑卒中
+    Route::group(["prefix"=>"CerebralApoplexy"],function (){
+        Route::any("/","CerebralApoplexyController@index");
+        Route::any("/create","CerebralApoplexyController@create");
+        Route::any("/option/{name}/{key?}","CerebralApoplexyController@option");
+    });
+
+    //抗凝方案
+    Route::group(["prefix"=>"AnticoagulantRegimen"],function (){
+        Route::any("/","AnticoagulantRegimenController@index");
+        Route::any("/create","AnticoagulantRegimenController@create");
+        Route::any("/option/{name}/{key?}","AnticoagulantRegimenController@option");
+    });
 
 
 });

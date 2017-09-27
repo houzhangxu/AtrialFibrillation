@@ -1,7 +1,7 @@
 @extends("common.layout")
 
 @section("title")
-    账户信息
+    抽烟喝酒
 @stop
 
 @section("header")

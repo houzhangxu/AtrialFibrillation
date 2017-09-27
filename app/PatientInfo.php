@@ -7,7 +7,7 @@
  */
 namespace App;
 
-class PatientInfo extends BaseModel{
+class PatientInfo extends BaseModel{    //病人信息
 
     protected $table = "patient_info";   //指定表名
     protected $primaryKey = "id";   //指定主键

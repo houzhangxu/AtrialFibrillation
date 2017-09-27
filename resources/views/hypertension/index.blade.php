@@ -1,7 +1,7 @@
 @extends("common.layout")
 
 @section("title")
-    账户信息
+    高血压
 @stop
 
 @section("header")
@@ -44,7 +44,7 @@
 
                 <div class="portlet-title">
 
-                    <div class="caption"><i class="icon-edit"></i>抽烟喝酒</div>
+                    <div class="caption"><i class="icon-edit"></i>高血压</div>
 
                 </div>
 
@@ -305,11 +305,8 @@
             //TableEditable.init();
 
             //var $modal = $('#ajax-modal');
-            Hmodal.select2({
-                id:"#drink_type",
-                url:"{{ url("/sd/option/DRINK_TYPE") }}",
 
-            });
+
         });
 
 

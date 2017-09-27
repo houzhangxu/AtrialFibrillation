@@ -9,7 +9,7 @@
 namespace App;
 
 class Hypertension extends BaseModel
-{
+{   //高血压
     protected $table = "hypertension";   //指定表名
     protected $primaryKey = "id";   //指定主键
 

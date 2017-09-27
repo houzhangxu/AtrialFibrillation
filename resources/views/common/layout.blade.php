@@ -215,8 +215,14 @@
                     <li class="{{ Request::getPathInfo() == "/hypertension" ?"active" : "" }}">
                         <a href="{{ url("/hypertension?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">高血压</a>
                     </li>
-                    <li>
-                        <a href="#">冠心病</a>
+                    <li class="{{ Request::getPathInfo() == "/CoronaryHeartDisease" ?"active" : "" }}">
+                        <a href="{{ url("/CoronaryHeartDisease?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">冠心病</a>
+                    </li>
+                    <li class="{{ Request::getPathInfo() == "/CerebralApoplexy" ?"active" : "" }}">
+                        <a href="{{ url("/CerebralApoplexy?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">脑卒中</a>
+                    </li>
+                    <li class="{{ Request::getPathInfo() == "/AnticoagulantRegimen" ?"active" : "" }}">
+                        <a href="{{ url("/AnticoagulantRegimen?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">抗凝方案</a>
                     </li>
 
                 </ul>

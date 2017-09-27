@@ -1,7 +1,7 @@
 @extends("common.layout")
 
 @section("title")
-    账户信息
+    家庭史
 @stop
 
 @section("header")
