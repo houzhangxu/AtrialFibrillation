@@ -193,13 +193,14 @@ var Hmodal = function (){
             oForm.find('.timepicker-24').timepicker({
                 minuteStep: 1,
                 showSeconds: true,
-                showMeridian: false
+                showMeridian: false,
             });
         }
 
         oForm.find(".form_datetime").datetimepicker({
             format: "yyyy-mm-dd hh:ii",
-            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+            autoclose:true
         });
 
         var success1 = $('<div class="alert alert-success hide"><button class="close" data-dismiss="alert"></button>验证成功. </div>');

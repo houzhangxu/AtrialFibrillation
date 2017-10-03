@@ -222,5 +222,47 @@ Route::group(["middleware"=>["web"]],function (){
 
     });
 
+    //糖尿病
+    Route::group(["prefix"=>"Diabetes"],function (){
+        Route::any("/","DiabetesController@index");
+        Route::any("/create","DiabetesController@create");
+        Route::any("/option/{name}/{key?}","DiabetesController@option");
+    });
+
+    //生殖激素
+    Route::group(["prefix"=>"ReproductiveHormone"],function (){
+        Route::any("/","ReproductiveHormoneController@index");
+        Route::any("/create","ReproductiveHormoneController@create");
+        Route::any("/option/{name}/{key?}","ReproductiveHormoneController@option");
+    });
+
+    //BNP
+    Route::group(["prefix"=>"BNP"],function (){
+        Route::any("/","BNPController@index");
+        Route::any("/create","BNPController@create");
+        Route::any("/option/{name}/{key?}","BNPController@option");
+    });
+
+    //手术参数
+    Route::group(["prefix"=>"Operation"],function (){
+        Route::any("/","OperationController@index");
+        Route::any("/create","OperationController@create");
+        Route::any("/option/{name}/{key?}","OperationController@option");
+    });
+
+    //住院费用
+    Route::group(["prefix"=>"HospitalizationExpenses"],function (){
+        Route::any("/","HospitalizationExpensesController@index");
+        Route::any("/create","HospitalizationExpensesController@create");
+        Route::any("/option/{name}/{key?}","HospitalizationExpensesController@option");
+    });
+
+    //房颤复发情况
+    Route::group(["prefix"=>"Relapse"],function (){
+        Route::any("/","RelapseController@index");
+        Route::any("/create","RelapseController@create");
+        Route::any("/option/{name}/{key?}","RelapseController@option");
+    });
+
 });
 

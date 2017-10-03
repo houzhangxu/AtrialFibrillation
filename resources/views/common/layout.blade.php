@@ -230,25 +230,30 @@
                         <a href="{{ url("/AnticoagulantRegimen?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">抗凝方案</a>
                     </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >糖尿病</a>
+                    <li class="{{ Request::getPathInfo() == "/Diabetes" ?"active" : "" }}">
+                        <a href="{{ url("/Diabetes?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >糖尿病</a>
                     </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >生殖激素</a>
+                    <li class="{{ Request::getPathInfo() == "/ReproductiveHormone" ?"active" : "" }}">
+                        <a href="{{ url("/ReproductiveHormone?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >生殖激素</a>
                     </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >BNP</a>
+                    <li class="{{ Request::getPathInfo() == "/BNP" ?"active" : "" }}">
+                        <a href="{{ url("/BNP?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >BNP</a>
                     </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >手术参数</a>
+                    <li class="{{ Request::getPathInfo() == "/Operation" ?"active" : "" }}">
+                        <a href="{{ url("/Operation?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >手术参数</a>
                     </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >住院费用</a>
+                    <li class="{{ Request::getPathInfo() == "/HospitalizationExpenses" ?"active" : "" }}">
+                        <a href="{{ url("/HospitalizationExpenses?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >住院费用</a>
                     </li>
+
+                    <li class="{{ Request::getPathInfo() == "/Relapse" ?"active" : "" }}">
+                        <a href="{{ url("/Relapse?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >房颤复发情况</a>
+                    </li>
+
                 </ul>
 
             </li>

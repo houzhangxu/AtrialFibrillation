@@ -1,7 +1,7 @@
 @extends("common.layout")
 
 @section("title")
-    抗凝方案
+    生殖激素
 @stop
 
 @section("header")
@@ -20,17 +20,17 @@
 @stop
 
 @section("content-title")
-    抗凝方案
+    生殖激素
 @stop
 
 @section("content-title-more")
-    抗凝方案详细信息
+    生殖激素详细信息
 @stop
 
 @section("breadcrumb-li")
     <li>
         <i class="icon-angle-right"></i>
-        <a href="#">抗凝方案</a>
+        <a href="#">生殖激素</a>
     </li>
 @stop
 
@@ -44,13 +44,13 @@
 
                 <div class="portlet-title">
 
-                    <div class="caption"><i class="icon-edit"></i>抗凝方案</div>
+                    <div class="caption"><i class="icon-edit"></i>生殖激素</div>
 
                 </div>
 
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form id="oForm" action="{{ url("AnticoagulantRegimen/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
+                    <form id="oForm" action="{{ url("ReproductiveHormone/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="Form[pid]" value="{{ $patient_info->id }}" />
                         <input type="hidden" name="Form[id_card]" value="{{ $patient_info->id_card }}" />
@@ -69,61 +69,65 @@
 
                         <div class="control-group">
 
-                            <label class="control-label">抗凝方案</label>
+                            <label class="control-label">睾酮ng/dl</label>
 
                             <div class="controls">
-                                @foreach($form->option(-1,"ANTI_FREEZING") as $key => $value)
-                                    <label class="radio">
-                                        <input type="radio" name="Form[anti_freezing]" value="{{ $key }}" {{ $form["anti_freezing"] == $key ? "checked" : "" }} />
-                                        {{ $value }}
-                                    </label>
-                                @endforeach
+                                    <input type="text" class="m-wrap span12" name="Form[testosterone]" value="{{ isset($form->testosterone) ?$form->testosterone:"" }}" placeholder="睾酮ng/dl">
                             </div>
 
                         </div>
 
                         <div class="control-group">
 
-                            <label class="control-label">拜瑞妥剂量(mg)</label>
+                            <label class="control-label">雌二醇pg/ml</label>
 
                             <div class="controls">
-                                <div class="input-append">
-                                    <input type="text" class="m-wrap span12" name="Form[xarelto_dose]" value="{{ isset($form->xarelto_dose) ?$form->xarelto_dose:0 }}" placeholder="拜瑞妥剂量">
-                                    <span class="add-on">mg</span>
-                                </div>
+                                <input type="text" name="Form[estradiol]" value="{{ isset($form->estradiol) ?$form->estradiol:"" }}"
+                                           class="span12" placeholder="雌二醇pg/ml" />
                             </div>
 
                         </div>
 
                         <div class="control-group">
 
-                            <label class="control-label">CHADS2</label>
+                            <label class="control-label">卵泡刺激素mIU/mL</label>
 
                             <div class="controls">
-                                <input type="text" name="Form[CHADS2]" value="{{ isset($form->CHADS2) ?$form->CHADS2:"" }}"
-                                           class="span12" placeholder="CHADS2" />
+                                <input type="text" name="Form[follicule_stimulating_hormone]" value="{{ isset($form->follicule_stimulating_hormone) ?$form->follicule_stimulating_hormone:"" }}"
+                                       class="span12" placeholder="卵泡刺激素mIU/mL" />
                             </div>
 
                         </div>
 
                         <div class="control-group">
 
-                            <label class="control-label">CHA2DS2-VASC</label>
+                            <label class="control-label">黄体生成素mIU/mL</label>
 
                             <div class="controls">
-                                <input type="text" name="Form[CHA2DS2_VASC]" value="{{ isset($form->CHA2DS2_VASC) ?$form->CHA2DS2_VASC:"" }}"
-                                       class="span12" placeholder="CHA2DS2_VASC" />
+                                <input type="text" name="Form[luteinizing_hormone]" value="{{ isset($form->luteinizing_hormone) ?$form->luteinizing_hormone:"" }}"
+                                       class="span12" placeholder="黄体生成素mIU/mL" />
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">泌乳素ng/ml</label>
+
+                            <div class="controls">
+                                <input type="text" name="Form[prolactin]" value="{{ isset($form->prolactin) ?$form->prolactin:"" }}"
+                                       class="span12" placeholder="泌乳素ng/ml" />
                             </div>
 
                         </div>
 
                         <div class="control-group last">
 
-                            <label class="control-label">HASBLED</label>
+                            <label class="control-label">孕酮ng/ml</label>
 
                             <div class="controls">
-                                <input type="text" name="Form[HASBLED]" value="{{ isset($form->HASBLED) ?$form->HASBLED:"" }}"
-                                       class="span12" placeholder="HASBLED" />
+                                <input type="text" name="Form[progesterone]" value="{{ isset($form->progesterone) ?$form->progesterone:"" }}"
+                                       class="span12" placeholder="孕酮ng/ml" />
                             </div>
 
                         </div>
@@ -149,8 +153,6 @@
     </div>
 
     <!-- END PAGE CONTENT -->
-
-    </div>
 @stop
 
 @section("document-ready")
@@ -170,20 +172,8 @@
             var oForm = Hmodal.form({
                 id: "#oForm",
                 messages: {
-                    "Form[anti_freezing]": {
-                        required: '抗凝方案史为必选项'
-                    },
-                    "Form[num]":{
-                        digits:"数量必须为整数"
-                    }
                 },
                 rules: {
-                    "Form[anti_freezing]": {
-                        required: true
-                    },
-                    "Form[num]":{
-                        digits:true
-                    }
                 }
 
             });

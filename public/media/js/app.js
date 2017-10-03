@@ -731,7 +731,9 @@ var App = function () {
 
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
-                rtl : App.isRTL()
+                rtl : App.isRTL(),
+                format: "yyyy-mm-dd",
+                autoclose: true
             });
         }
     };
