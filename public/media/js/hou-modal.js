@@ -389,9 +389,13 @@ var Hmodal = function (){
                 },
                 success: function(result) {
                     if(result.code == 1){
-                        Table.fnDraw();
-                        toastr.success(result.message);
-                    }else if(result.code == 2){
+                        if(!Table){
+                            location.reload();
+                        }else{
+                            Table.fnDraw();
+                            toastr.success(result.message);
+                        }
+                    }else if(result.code == 0){
                         toastr.error(result.message);
                     }else{
                         toastr.error("服务器出现错误.");

@@ -1,7 +1,7 @@
 @extends("common.layout")
 
 @section("title")
-    高血压
+    甲状腺功能
 @stop
 
 @section("header")
@@ -20,17 +20,17 @@
 @stop
 
 @section("content-title")
-    高血压测量
+    甲状腺功能
 @stop
 
 @section("content-title-more")
-    高血压测量详细信息
+    甲状腺功能详细信息
 @stop
 
 @section("breadcrumb-li")
     <li>
         <i class="icon-angle-right"></i>
-        <a href="{{ url("") }}">高血压测量</a>
+        <a href="{{ url("") }}">甲状腺功能</a>
     </li>
 @stop
 
@@ -44,7 +44,7 @@
 
                 <div class="portlet-title">
 
-                    <div class="caption"><i class="icon-edit"></i>高血压</div>
+                    <div class="caption"><i class="icon-edit"></i>甲状腺功能</div>
 
                 </div>
 
@@ -55,17 +55,18 @@
 
                         @foreach($measures as $measur)
                             <h3 class="form-section"> {{ date("Y-m-d H:i",$measur["measure_time"]) }} <a href="javascript:editRecord('{{ $measur->id }}');">修改</a> <a href="javascript:del('{{ $measur->id }}');">删除</a></h3>
+
                             <div class="row-fluid">
 
                                 <div class="span6 ">
 
                                     <div class="control-group">
 
-                                        <label class="control-label" for="">收缩压: </label>
+                                        <label class="control-label" for="">总甲状腺素nmol/L: </label>
 
                                         <div class="controls">
 
-                                            <span class="text">{{ $measur["systolic_pressure"] }}</span>
+                                            <span class="text">{{ $measur["thyroxine"] }}</span>
 
                                         </div>
 
@@ -79,11 +80,11 @@
 
                                     <div class="control-group">
 
-                                        <label class="control-label" for="lastName">舒张压: </label>
+                                        <label class="control-label" for="">总三碘甲状腺原氨酸nmol/L: </label>
 
                                         <div class="controls">
 
-                                            <span class="text">{{ $measur["diastolic_pressure"] }}</span>
+                                            <span class="text">{{ $measur["triiodothyronine"] }}</span>
 
                                         </div>
 
@@ -92,6 +93,73 @@
                                 </div>
 
                                 <!--/span-->
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6 ">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label" for="">第三代促甲状腺素mIU/L: </label>
+
+                                        <div class="controls">
+
+                                            <span class="text">{{ $measur["third_generation_thyroid_stimulating_hormone"] }}</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="span6 ">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label" for="">游离甲状腺素: </label>
+
+                                        <div class="controls">
+
+                                            <span class="text">{{ $measur["free_thyroxine"] }}</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6 ">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label" for="">游离三碘甲状腺原氨酸pmol/L: </label>
+
+                                        <div class="controls">
+
+                                            <span class="text">{{ $measur["free_triiodothyronine"] }}</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="span6 ">
+
+                                    <div class="control-group">
+
+                                        <label class="control-label" for="">甲状腺过氧化物酶抗体IU/mL: </label>
+
+                                        <div class="controls">
+
+                                            <span class="text">{{ $measur["thyroid_peroxidase_antibody"] }}</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
 
                             </div>
                         @endforeach
@@ -134,11 +202,13 @@
             //App.init();
             //TableEditable.init();
 
+            //var $modal = $('#ajax-modal');
+
             $('#btnAdd').on('click', function(){
                 // create the backdrop and wait for next modal to be triggered
                 Hmodal.dialog({
-                    url: "{{ url("hypertension/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
-                    title: "高血压测量",
+                    url: "{{ url("ThyroidFunction/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
+                    title: "甲状腺功能",
                     width: 800,
                     buttons: [
                         { inner: "保存", className: "btn blue",    click: function() {
@@ -149,13 +219,12 @@
                 });
 
             });
-
         });
 
         function editRecord(id){
             Hmodal.dialog({
-                url: "{{ url("hypertension/measure/update") }}" + "/" + id,
-                title: "修改高血压",
+                url: "{{ url("ThyroidFunction/measure/update") }}" + "/" + id,
+                title: "修改数据",
                 width: 800,
                 buttons: [
                     { inner: "保存", className: "btn blue",click: function() {
@@ -169,7 +238,7 @@
         function del(id){
             Hmodal.delete({
                 "id":id,
-                "url": "{{ url("hypertension/measure/delete") }}",
+                "url": "{{ url("ThyroidFunction/measure/delete") }}",
                 "Table": false
             });
         }

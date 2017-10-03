@@ -118,8 +118,15 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/","HypertensionController@index");
         Route::any("/create","HypertensionController@create");
         Route::any("/option/{name}/{key?}","HypertensionController@option");
-        Route::any("/measure","HypertensionController@measure");
-        Route::any("/measure/create","HypertensionController@measureCreate");
+
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","HypertensionController@measure");
+            Route::any("/create","HypertensionController@measureCreate");
+            Route::any("/update/{id}","HypertensionController@measureUpdate");
+            Route::any("/delete","HypertensionController@measureDelete");
+        });
+
     });
 
     //冠心病
@@ -143,6 +150,77 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/option/{name}/{key?}","AnticoagulantRegimenController@option");
     });
 
+    //心律失常药物
+    Route::group(["prefix"=>"ArrhythmicDrugs"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","ArrhythmicDrugsController@measure");
+            Route::any("/create","ArrhythmicDrugsController@measureCreate");
+            Route::any("/update/{id}","ArrhythmicDrugsController@measureUpdate");
+            Route::any("/delete","ArrhythmicDrugsController@measureDelete");
+        });
+
+    });
+
+    //房颤负荷
+    Route::group(["prefix"=>"AtrialFibrillationBurden"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","AtrialFibrillationBurdenController@measure");
+            Route::any("/create","AtrialFibrillationBurdenController@measureCreate");
+            Route::any("/update/{id}","AtrialFibrillationBurdenController@measureUpdate");
+            Route::any("/delete","AtrialFibrillationBurdenController@measureDelete");
+        });
+
+    });
+
+    //肾功能不全
+    Route::group(["prefix"=>"RenalInadequacy"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","RenalInadequacyController@measure");
+            Route::any("/create","RenalInadequacyController@measureCreate");
+            Route::any("/update/{id}","RenalInadequacyController@measureUpdate");
+            Route::any("/delete","RenalInadequacyController@measureDelete");
+        });
+
+    });
+
+    //甲状腺功能
+    Route::group(["prefix"=>"ThyroidFunction"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","ThyroidFunctionController@measure");
+            Route::any("/create","ThyroidFunctionController@measureCreate");
+            Route::any("/update/{id}","ThyroidFunctionController@measureUpdate");
+            Route::any("/delete","ThyroidFunctionController@measureDelete");
+        });
+
+    });
+
+    //肝功能不全
+    Route::group(["prefix"=>"HepaticInsufficiency"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","HepaticInsufficiencyController@measure");
+            Route::any("/create","HepaticInsufficiencyController@measureCreate");
+            Route::any("/update/{id}","HepaticInsufficiencyController@measureUpdate");
+            Route::any("/delete","HepaticInsufficiencyController@measureDelete");
+        });
+
+    });
+
+    //血脂
+    Route::group(["prefix"=>"BloodFat"],function (){
+        //随访页面
+        Route::group(["prefix"=>"measure"],function (){
+            Route::any("/","BloodFatController@measure");
+            Route::any("/create","BloodFatController@measureCreate");
+            Route::any("/update/{id}","BloodFatController@measureUpdate");
+            Route::any("/delete","BloodFatController@measureDelete");
+        });
+
+    });
 
 });
 
