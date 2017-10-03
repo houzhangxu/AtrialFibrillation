@@ -82,12 +82,12 @@ class HypertensionController extends Controller
 
         if($request->isMethod("Post")){
             $data["code"] = 1;
-            $data["message"] = "";
+            $data["message"] = "添加失败";
 
-            $measur = $request->input("Measure");
-            $measur["measure_time"] = strtotime($measur["measure_time"]);
+            $measure = $request->input("Measure");
+            $measure["measure_time"] = strtotime($measure["measure_time"]);
 
-            if(HypertensionMeasure::create($measur)){
+            if(HypertensionMeasure::create($measure)){
                 $data["code"] = 1;
                 $data["message"] = "添加成功";
             }
@@ -104,6 +104,53 @@ class HypertensionController extends Controller
         return view("hypertension.measure_create",[
             "patient_info"=>$patient_info
         ]);
+    }
+
+    public function measureUpdate(Request $request,$id){
+
+        if($request->isMethod("Post")){
+            $data["code"] = 1;
+            $data["message"] = "修改失败";
+
+            $measure = $request->input("Measure");
+            $measure["measure_time"] = strtotime($measure["measure_time"]);
+
+            if(HypertensionMeasure::where("id",$id)->update($measur)){
+                $data["code"] = 1;
+                $data["message"] = "修改成功";
+                Session::flash("result",$data);
+            }
+
+            return $data;
+        }
+
+        $measure = HypertensionMeasure::find($id);
+        if($measure == null){
+            return "未找到记录";
+        }
+
+        $id_card = $measure->id_card;
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();
+
+        return view("hypertension.measure_update",[
+            "patient_info"=>$patient_info,
+            "measure"=>$measure
+        ]);
+    }
+
+    public function measureDelete(Request $request){
+        $data["message"] = "删除失败";
+        $data["code"] = "0";
+
+        if($request->has("ids") && $request->input("ids") != ""){
+            if (HypertensionMeasure::destroy($request->input("ids"))){
+                $data["message"] = "删除成功";
+                $data["code"] = "1";
+                Session::flash("result",$data);
+            }
+        }
+
+        return $data;
     }
 
 

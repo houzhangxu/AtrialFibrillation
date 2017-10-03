@@ -101,6 +101,31 @@ class PatientInfo extends BaseModel{    //病人信息
         2=>"否"
     ];
 
+    protected $UREMIA = [   //尿毒症
+        1=>"是",
+        2=>"否"
+    ];
+
+    protected $HEPATITIS_B = [  //乙肝
+        1=>"是",
+        2=>"否"
+    ];
+
+    protected $HEPATIC_ADIPOSE_INFILTRATION = [ //脂肪肝
+        1=>"是",
+        2=>"否"
+    ];
+
+    protected $HYPERTHYREOSIS = [   //甲亢
+        1=>"是",
+        2=>"否"
+    ];
+
+    protected $HYPOTHYROIDISM = [       //甲减
+        1=>"是",
+        2=>"否"
+    ];
+
     public function manual($ind = null){    //示例
         if($ind != null){
             return array_key_exists($ind,$this->MANUAL) ? $this->MANUAL[$ind] : $this->UN;

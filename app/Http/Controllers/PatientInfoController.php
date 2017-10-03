@@ -105,6 +105,7 @@ class PatientInfoController extends Controller
             $data["message"] = "修改失败";
             $patient_info = $request->input("PatientInfo");
             $patient_info["birth_date"] = strtotime($patient_info["birth_date"]);     //出生日期
+            $patient_info["admission_time"] = strtotime($patient_info["admission_time"]);       //入组时间
 
             if(PatientInfo::where("id",$id)->update($patient_info)){
                 $data["code"] = 1;
