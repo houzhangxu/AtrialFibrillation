@@ -180,6 +180,88 @@
 
             <div class="control-group">
 
+                <label class="control-label" for="lastName">尿毒症:</label>
+
+                <div class="controls">
+                    <span class="text">{{ $patient_info->option($patient_info["uremia"],"UREMIA") }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label" for="lastName">乙肝:</label>
+
+                <div class="controls">
+                    <span class="text">{{ $patient_info->option($patient_info["hepatitis_B"],"HEPATITIS_B") }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label" for="lastName">脂肪肝:</label>
+
+                <div class="controls">
+                    <span class="text">{{ $patient_info->option($patient_info["hepatic_adipose_infiltration"],"HEPATIC_ADIPOSE_INFILTRATION") }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label" for="lastName">甲亢:</label>
+
+                <div class="controls">
+                    <span class="text">{{ $patient_info->option($patient_info["hyperthyreosis"],"HYPERTHYREOSIS") }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label" for="lastName">甲减:</label>
+
+                <div class="controls">
+                    <span class="text">{{ $patient_info->option($patient_info["hypothyroidism"],"HYPOTHYROIDISM") }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
                 <label class="control-label" for="lastName">住院号:</label>
 
                 <div class="controls">

@@ -108,7 +108,7 @@
 
             <!-- BEGIN LOGO -->
 
-            <a class="brand" href="index.html">
+            <a class="brand" href="{{ url("/") }}">
 
                 <img src="{{ asset("media/image/logo.png") }}" alt="logo"/>
 

@@ -13,10 +13,11 @@ class PatientInfo extends BaseModel{    //病人信息
     protected $primaryKey = "id";   //指定主键
 
     protected $fillable = [
-        "id_card","name","sex","admission_time","intervention_num","manual","radio_frequency","pacing","fibrillation","left_atrial_appendage",
-        "hospital_number","phone1","phone2","birth_date","career","ismarry","child_num","religious_belief","cultural_level","native_place",
-        "sleep_apnea", "new_york_heart_function","COPD","history_of_connective_tissue","history_of_cancer","other_medical_history","height",
-        "body_weight","abdominal_circumference","BMI","MOCA"
+        "id_card","name","sex","admission_time","intervention_num","manual","radio_frequency","pacing","fibrillation",
+        "left_atrial_appendage", "hospital_number","phone1","phone2","birth_date","career","ismarry","child_num",
+        "religious_belief", "cultural_level","native_place", "sleep_apnea", "new_york_heart_function","COPD",
+        "history_of_connective_tissue", "history_of_cancer", "other_medical_history","height", "uremia","hepatitis_B",
+        "hepatic_adipose_infiltration", "hyperthyreosis","hypothyroidism", "body_weight","abdominal_circumference","BMI","MOCA"
     ];    //指定允许批量赋值的字段
 
     public $timestamps = true;   //维护时间戳

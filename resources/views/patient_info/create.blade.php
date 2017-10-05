@@ -236,6 +236,113 @@
 
             <div class="control-group">
 
+                <label class="control-label">尿毒症</label>
+
+                <div class="controls">
+                    @foreach($patient_info->option(-1,"UREMIA") as $key => $value)
+                        <label class="radio">
+                            <input type="radio" name="PatientInfo[uremia]" value="{{ $key }}" />
+                            {{ $value }}
+                        </label>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label">乙肝</label>
+
+                <div class="controls">
+                    @foreach($patient_info->option(-1,"HEPATITIS_B") as $key => $value)
+                        <label class="radio">
+                            <input type="radio" name="PatientInfo[hepatitis_B]" value="{{ $key }}" />
+                            {{ $value }}
+                        </label>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label">脂肪肝</label>
+
+                <div class="controls">
+                    @foreach($patient_info->option(-1,"HEPATIC_ADIPOSE_INFILTRATION") as $key => $value)
+                        <label class="radio">
+                            <input type="radio" name="PatientInfo[hepatic_adipose_infiltration]" value="{{ $key }}" />
+                            {{ $value }}
+                        </label>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label">甲亢</label>
+
+                <div class="controls">
+                    @foreach($patient_info->option(-1,"HYPERTHYREOSIS") as $key => $value)
+                        <label class="radio">
+                            <input type="radio" name="PatientInfo[hyperthyreosis]" value="{{ $key }}" />
+                            {{ $value }}
+                        </label>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
+                <label class="control-label">甲减</label>
+
+                <div class="controls">
+                    @foreach($patient_info->option(-1,"HYPOTHYROIDISM") as $key => $value)
+                        <label class="radio">
+                            <input type="radio" name="PatientInfo[hypothyroidism]" value="{{ $key }}" />
+                            {{ $value }}
+                        </label>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+
+        <div class="span6 ">
+
+            <div class="control-group">
+
                 <label class="control-label"><span class="required">*</span> 住院号</label>
 
                 <div class="controls">

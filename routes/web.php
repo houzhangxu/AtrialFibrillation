@@ -264,5 +264,9 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/option/{name}/{key?}","RelapseController@option");
     });
 
+    //Excel导入导出
+    Route::get("import","ExcelController@import");
+    Route::get("export","ExcelController@export");
+
 });
 

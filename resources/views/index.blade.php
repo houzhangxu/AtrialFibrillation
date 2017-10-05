@@ -120,7 +120,7 @@
                     },
                     { "mData": "id_card","sTitle": "身份证",  "sDefaultContent": "无", "bSortable": true },
                     { "mData": "hospital_number","sTitle": "住院号",  "sDefaultContent": "无", "bSortable": true },
-                    { "mData": "connection_info1","sTitle": "联系方式1",  "sDefaultContent": "无", "bSortable": true },
+                    { "mData": "phone1","sTitle": "联系方式1",  "sDefaultContent": "无", "bSortable": true },
                     { "mData": "admission_time","sTitle": "入组时间",  "sDefaultContent": "无", "bSortable": true,
                         "mRender": function(data, type, full){
                             //alert(type);

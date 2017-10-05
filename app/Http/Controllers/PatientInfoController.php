@@ -20,7 +20,7 @@ class PatientInfoController extends Controller
     }
 
     public function record(Request $request){
-        $sortCols = ["name","id_card","hospital_number","connection_info1","admission_time"];
+        $sortCols = ["name","id_card","hospital_number","phone1","admission_time"];
 
         $where = "1=1 ";
         $whereArray = [];
@@ -31,7 +31,7 @@ class PatientInfoController extends Controller
         //表格全局搜索条件
         if($request->has("sSearch") && $request->input("sSearch")!=""){
             $sSearch = $request->input("sSearch");
-            $where .= "and (name like ? or id_card like ? or hospital_number like ? or connection_info1 like ?) ";
+            $where .= "and (name like ? or id_card like ? or hospital_number like ? or phone1 like ?) ";
             //SQL语句 对指定字段进行模糊查询
             $whereArray[] = "%".$sSearch."%"; //添加对应查询条件的值
             $whereArray[] = "%".$sSearch."%"; //添加对应查询条件的值
