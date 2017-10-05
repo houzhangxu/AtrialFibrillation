@@ -273,6 +273,7 @@ var Hmodal = function (){
                             if(flashPage){
                                 location.reload();
                             }else{
+                                oTable.fnDraw();
                                 toastr.success(result.message);
                             }
                         }else if(result.code == 0){

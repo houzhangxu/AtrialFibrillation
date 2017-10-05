@@ -190,7 +190,7 @@
                     buttons: [
                         { inner: "保存", className: "btn blue",    click: function() {
                             oForm_add.submit();
-                            oTable.fnDraw();
+                            //oTable.fnDraw();
                         } },
                         { inner: "关 闭", className: "btn default", click: function() { this.modal('hide'); } }
                     ]
@@ -216,7 +216,7 @@
                 buttons: [
                     { inner: "保存", className: "btn blue",click: function() {
                         oForm_update.submit();
-                        oTable.fnDraw();
+                        //oTable.fnDraw();
                     } },
                     { inner: "关 闭", className: "btn default", click: function() { this.modal('hide'); } }
                 ]
