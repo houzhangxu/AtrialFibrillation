@@ -22,6 +22,12 @@ class PatientInfo extends BaseModel{    //病人信息
 
     public $timestamps = true;   //维护时间戳
 
+    //关系
+    public function family(){
+        return $this->hasOne("App\FamilyHistory","id_card","id_card");
+    }
+
+    //选项
     protected $SEX = [    //性别
         1=>"男",
         2=>"女"

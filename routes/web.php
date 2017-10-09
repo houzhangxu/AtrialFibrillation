@@ -267,6 +267,8 @@ Route::group(["middleware"=>["web"]],function (){
     //Excel导入导出
     Route::get("import","ExcelController@import");
     Route::get("export","ExcelController@export");
+    Route::get("export1","ExcelController@export1");
+    Route::get("excelv","ExcelController@view");
 
 });
 

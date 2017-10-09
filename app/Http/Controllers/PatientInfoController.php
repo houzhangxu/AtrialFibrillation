@@ -61,8 +61,9 @@ class PatientInfoController extends Controller
     public function create(Request $request){
         if($request->isMethod("POST")){
             $patient_info = $request->input("PatientInfo");
-            $patient_info["admission_time"] = strtotime($patient_info["admission_time"]);       //入组时间
-            $patient_info["birth_date"] = strtotime($patient_info["birth_date"]);     //出生日期
+            $patient_info["admission_time"] = isset($patient_info["admission_time"])?strtotime($patient_info["admission_time"]):null;       //入组时间
+            $patient_info["birth_date"] = isset($patient_info["birth_date"])?strtotime($patient_info["birth_date"]):null;     //出生日期
+
             $data["code"] = 0;
             if(PatientInfo::create($patient_info)){
                 $data["code"] = 1;
@@ -104,8 +105,8 @@ class PatientInfoController extends Controller
             $data["code"] = 0;
             $data["message"] = "修改失败";
             $patient_info = $request->input("PatientInfo");
-            $patient_info["birth_date"] = strtotime($patient_info["birth_date"]);     //出生日期
-            $patient_info["admission_time"] = strtotime($patient_info["admission_time"]);       //入组时间
+            $patient_info["admission_time"] = isset($patient_info["admission_time"])?strtotime($patient_info["admission_time"]):null;       //入组时间
+            $patient_info["birth_date"] = isset($patient_info["birth_date"])?strtotime($patient_info["birth_date"]):null;     //出生日期
 
             if(PatientInfo::where("id",$id)->update($patient_info)){
                 $data["code"] = 1;

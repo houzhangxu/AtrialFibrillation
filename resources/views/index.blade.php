@@ -66,10 +66,10 @@
                         <div class="btn-group">
                             <a href="javascript:;" id="btnAdd" class="btn green btn-sm table-button">
                                 <i class="icon-plus icon-white"></i> 添加 </a>
-                            <!--
-                            <a href="javascript:;" id="btnQuery" class="btn blue btn-sm table-button">
-                                <i class="icon-white icon-search"></i> 查询 </a>
-                                -->
+                            <a href="{{ url("/import") }}" id="" class="btn blue btn-sm table-button" target="_blank">
+                                <i class="icon-white icon-arrow-up"></i> 导入 </a>
+                            <a href="{{ url("/export") }}" id="" class="btn blue btn-sm table-button purple" target="_blank">
+                                <i class="icon-white icon-arrow-down"></i> 导出 </a>
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                     { "mData": "admission_time","sTitle": "入组时间",  "sDefaultContent": "无", "bSortable": true,
                         "mRender": function(data, type, full){
                             //alert(type);
-                            return date("Y-m-d H:i:s",data);
+                            return data == 0 || data == null || typeof(data) == "undefined" ? "无" : date("Y-m-d",data);
                         }
                     },
                     {

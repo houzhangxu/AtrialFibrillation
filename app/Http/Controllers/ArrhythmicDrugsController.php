@@ -38,7 +38,7 @@ class ArrhythmicDrugsController extends Controller
             $measure = $request->input("Measure");
             $measure["measure_time"] = strtotime($measure["measure_time"]);
 
-            if(ArrhythmicDrugsMeasure::create($measur)){
+            if(ArrhythmicDrugsMeasure::create($measure)){
                 $data["code"] = 1;
                 $data["message"] = "添加成功";
             }
