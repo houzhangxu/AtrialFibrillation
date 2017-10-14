@@ -118,34 +118,18 @@
             "Measure[measure_time]": {
                 required: '测量时间不能为空!'
             },
-            "Measure[load_hour]": {
-                required: '房颤负荷每小时不能为空!'
-            },
-            "Measure[heart_rate_day]": {
-                required: '24小时心率不能为空!'
-            },
-            "Measure[atrial_premature_beats]"	  : {
-                required: '房性早搏不能为空!'
-            },
-            "Measure[premature_ventricualr_contraction]"	  : {
-                required: '室性早搏不能为空!'
+            "Measure[premature_ventricualr_contraction]": {
+                digits:"必须为整数",
+                range:"5到10"
             }
         },
         rules: {
             "Measure[measure_time]": {
                 required: true
             },
-            "Measure[load_hour]": {
-                required: true
-            },
-            "Measure[heart_rate_day]": {
-                required: true
-            },
-            "Measure[atrial_premature_beats]"	  : {
-                required: true
-            },
-            "Measure[premature_ventricualr_contraction]"	  : {
-                required: true
+            "Measure[premature_ventricualr_contraction]": {
+                digits:true,
+                range:[5,10]
             }
         }
 
