@@ -282,8 +282,15 @@ var Hmodal = function (){
                             toastr.error("服务器错误,请联系管理员.");
                         }
                     },
-                    error: function(r, s, q) {
-                        toastr.error("提交数据出现错误,请联系管理员.");
+                    error: function(result) {
+                        console.log(result);
+                        var errors = result["responseJSON"]["errors"];
+                        for(error in errors){
+                            for(message in errors[error]){
+                                toastr.error(errors[error][message]);
+                            }
+                        }
+                        //toastr.error("提交数据出现错误,请联系管理员.");
                         // alert("出错了");
                     }
                 })

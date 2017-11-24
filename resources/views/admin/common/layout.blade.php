@@ -81,6 +81,48 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("media/css/h.css") }}" />
     <!-- 自有css结束 -->
 
+    <!-- BEGIN PAGE LEVEL STYLES -->
+
+    <link rel="" type="text/css" href=http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset("media/css/DT_bootstrap.css") }}" />
+
+    <!-- END PAGE LEVEL STYLES -->
+
+    <style>
+        .table-button{
+            width: 50px;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+
+        .select2-drop {
+            z-index: 10050 !important;
+        }
+
+        .select2-search-choice-close {
+            margin-top: 0 !important;
+            right: 2px !important;
+            min-height: 10px;
+        }
+
+        .select2-search-choice-close:before {
+            color: black !important;
+        }
+        /*防止select2不会自动失去焦点*/
+        .select2-container {
+            z-index: 16000 !important;
+        }
+
+        .select2-drop-mask {
+            z-index: 15990 !important;
+        }
+
+        .select2-drop-active {
+            z-index: 15995 !important;
+        }
+
+    </style>
+
     @section("style")
 
     @show
@@ -98,75 +140,75 @@
 <!-- BEGIN HEADER -->
 
 @section("header")
-<div class="header navbar navbar-inverse navbar-fixed-top">
+    <div class="header navbar navbar-inverse navbar-fixed-top">
 
-    <!-- BEGIN TOP NAVIGATION BAR -->
+        <!-- BEGIN TOP NAVIGATION BAR -->
 
-    <div class="navbar-inner">
+        <div class="navbar-inner">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <!-- BEGIN LOGO -->
+                <!-- BEGIN LOGO -->
 
-            <a class="brand" href="{{ url("/") }}">
+                <a class="brand" href="{{ url("/") }}">
 
-                <img src="{{ asset("media/image/logo.png") }}" alt="logo"/>
+                    <img src="{{ asset("media/image/logo.png") }}" alt="logo"/>
 
-            </a>
+                </a>
 
-            <!-- END LOGO -->
+                <!-- END LOGO -->
 
-            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
 
-            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-                <img src="{{ asset("media/image/menu-toggler.png") }}" alt="" />
+                    <img src="{{ asset("media/image/menu-toggler.png") }}" alt="" />
 
-            </a>
+                </a>
 
-            <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- END RESPONSIVE MENU TOGGLER -->
 
-            <!-- BEGIN TOP NAVIGATION MENU -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
 
-            <ul class="nav pull-right">
+                <ul class="nav pull-right">
 
-                <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
 
-                <li class="dropdown user">
+                    <li class="dropdown user">
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <img alt="" src="{{ asset("media/image/avatar_qq.jpg") }}" width="29" height="29" />
+                            <img alt="" src="{{ asset("media/image/avatar_qq.jpg") }}" width="29" height="29" />
 
-                        <span class="username"> {{ Auth::user()->name }}</span>
+                            <span class="username"> {{ Auth::user()->name }}</span>
 
-                        <i class="icon-angle-down"></i>
+                            <i class="icon-angle-down"></i>
 
-                    </a>
+                        </a>
 
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="icon-key"></i> Log Out</a></li>
-                    </ul>
+                        </ul>
 
-                </li>
+                    </li>
 
-                <!-- END USER LOGIN DROPDOWN -->
+                    <!-- END USER LOGIN DROPDOWN -->
 
-            </ul>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
+                </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
 
-            <!-- END TOP NAVIGATION MENU -->
+                <!-- END TOP NAVIGATION MENU -->
+
+            </div>
 
         </div>
 
+        <!-- END TOP NAVIGATION BAR -->
+
     </div>
-
-    <!-- END TOP NAVIGATION BAR -->
-
-</div>
 @show
 
 <!-- END HEADER -->
@@ -177,145 +219,58 @@
 
     <!-- BEGIN SIDEBAR -->
     @section("sidebar")
-    <div class="page-sidebar nav-collapse collapse">
+        <div class="page-sidebar nav-collapse collapse">
 
-        <!-- BEGIN SIDEBAR MENU -->
+            <!-- BEGIN SIDEBAR MENU -->
 
-        <ul class="page-sidebar-menu">
+            <ul class="page-sidebar-menu">
 
-            <li>
+                <li>
 
-                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
-                <div class="sidebar-toggler hidden-phone"></div>
+                    <div class="sidebar-toggler hidden-phone"></div>
 
-                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
-            </li>
-            <li>
-                <div style="margin-top:5px;"></div>
-            </li>
+                </li>
+                <li>
+                    <div style="margin-top:5px;"></div>
+                </li>
 
-            <li class="{{ !strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
+                <li class="{{ !strstr(Request::getPathInfo(),"measure") ? "active" : "" }}">
+                    <a href="javascript:;">
 
-                <a href="javascript:;">
+                        <i class="icon-file-text"></i>
 
-                    <i class="icon-file-text"></i>
+                        <span class="title">系统管理</span>
 
-                    <span class="title">@yield("patient-name")</span>
+                        <span class="arrow"></span>
 
-                    <span class="arrow open"></span>
+                    </a>
 
-                </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::getPathInfo() == "/admin/user" ?"active" : "" }}">
+                            <a href="{{ route("admin.user.index") }}">用户管理</a>
+                        </li>
+                        <li class="{{ Request::getPathInfo() == "/admin/role" ?"active" : "" }}">
+                            <a href="{{ route("admin.role.index") }}">角色管理</a>
+                        </li>
+                        <li class="{{ Request::getPathInfo() == "/admin/permissions" ?"active" : "" }}">
+                            <a href="{{ route("admin.permissions.index") }}">权限管理</a>
+                        </li>
+                    </ul>
 
-                <ul class="sub-menu"><!-- 二级菜单 -->
+                </li>
 
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >家族史</a>
-                    </li>
+            </ul>
 
-                    <li class="{{ Request::getPathInfo() == "/sd" ?"active" : "" }}">
-                        <a href="{{ url("/sd?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >抽烟喝酒</a>
-                    </li>
+            <!-- END SIDEBAR MENU -->
 
-                    <li class="{{ Request::getPathInfo() == "/hypertension" ?"active" : "" }}">
-                        <a href="{{ url("/hypertension?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">高血压</a>
-                    </li>
+        </div>
+@show
 
-                    <li class="{{ Request::getPathInfo() == "/CoronaryHeartDisease" ?"active" : "" }}">
-                        <a href="{{ url("/CoronaryHeartDisease?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">冠心病</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/CerebralApoplexy" ?"active" : "" }}">
-                        <a href="{{ url("/CerebralApoplexy?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">脑卒中</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/AnticoagulantRegimen" ?"active" : "" }}">
-                        <a href="{{ url("/AnticoagulantRegimen?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">抗凝方案</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Diabetes" ?"active" : "" }}">
-                        <a href="{{ url("/Diabetes?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >糖尿病</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ReproductiveHormone" ?"active" : "" }}">
-                        <a href="{{ url("/ReproductiveHormone?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >生殖激素</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/BNP" ?"active" : "" }}">
-                        <a href="{{ url("/BNP?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >BNP</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Operation" ?"active" : "" }}">
-                        <a href="{{ url("/Operation?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >手术参数</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/HospitalizationExpenses" ?"active" : "" }}">
-                        <a href="{{ url("/HospitalizationExpenses?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >住院费用</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Relapse" ?"active" : "" }}">
-                        <a href="{{ url("/Relapse?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >房颤复发情况</a>
-                    </li>
-
-                </ul>
-
-            </li>
-
-            <li class="{{ strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
-
-                <a href="javascript:;">
-
-                    <i class="icon-file-text"></i>
-
-                    <span class="title">随访</span>
-
-                    <span class="arrow"></span>
-
-                </a>
-
-                <ul class="sub-menu"><!-- 二级菜单 -->
-
-                    <li class="{{ Request::getPathInfo() == "/hypertension/measure" ?"active" : "" }}">
-                        <a href="{{ url("/hypertension/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >高血压</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ArrhythmicDrugs/measure" ?"active" : "" }}">
-                        <a href="{{ url("/ArrhythmicDrugs/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >心律失常药物</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/AtrialFibrillationBurden/measure" ?"active" : "" }}">
-                        <a href="{{ url("/AtrialFibrillationBurden/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >房颤负荷</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/RenalInadequacy/measure" ?"active" : "" }}">
-                        <a href="{{ url("/RenalInadequacy/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >肾功能不全</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ThyroidFunction/measure" ?"active" : "" }}">
-                        <a href="{{ url("/ThyroidFunction/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >甲状腺功能</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/HepaticInsufficiency/measure" ?"active" : "" }}">
-                        <a href="{{ url("/HepaticInsufficiency/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >肝功能不全</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/BloodFat/measure" ?"active" : "" }}">
-                        <a href="{{ url("/BloodFat/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >血脂</a>
-                    </li>
-
-                </ul>
-
-            </li>
-
-        </ul>
-
-        <!-- END SIDEBAR MENU -->
-
-    </div>
-    @show
-
-    <!-- END SIDEBAR -->
+<!-- END SIDEBAR -->
 
     <!-- BEGIN PAGE -->
 
@@ -327,34 +282,34 @@
 
             <!-- BEGIN PAGE HEADER-->
             @section("content-header")
-            <div class="row-fluid">
+                <div class="row-fluid">
 
-                <div class="span12">
+                    <div class="span12">
 
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
-                    <h3 class="page-title">
+                        <h3 class="page-title">
 
-                        @yield("content-title") <small>@yield("content-title-more")</small>
+                            @yield("content-title") <small>@yield("content-title-more")</small>
 
-                    </h3>
+                        </h3>
 
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="icon-home"></i>
-                            <a href="{{ route("/") }}">主页</a>
-                        </li>
-                        @yield("breadcrumb-li")
-                    </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="icon-home"></i>
+                                <a href="{{ route("/") }}">主页</a>
+                            </li>
+                            @yield("breadcrumb-li")
+                        </ul>
 
-                    <!-- END PAGE TITLE & BREADCRUMB-->
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+
+                    </div>
 
                 </div>
-
-            </div>
             @show
-            <!-- END PAGE HEADER-->
-        @yield("content")
+        <!-- END PAGE HEADER-->
+            @yield("content")
 
         </div>
 
@@ -370,15 +325,15 @@
 
 <!-- BEGIN FOOTER -->
 @section("footer")
-<div class="footer">
+    <div class="footer">
 
-    <div class="footer-inner">
+        <div class="footer-inner">
 
-        2017 &copy; 房颤数据 <a href="http://123.206.199.205" title="PA" target="_blank">Position:Absolute</a>
+            2017 &copy; 房颤数据 <a href="http://123.206.199.205" title="PA" target="_blank">Position:Absolute</a>
 
-    </div>
+        </div>
 
-    <div class="footer-tools">
+        <div class="footer-tools">
 
 			<span class="go-top">
 
@@ -386,9 +341,9 @@
 
 			</span>
 
-    </div>
+        </div>
 
-</div>
+    </div>
 @show
 
 <div id="ajax-modal" class="modal hide fade" data-width="800" tabindex="-1">
@@ -542,7 +497,7 @@
 
         @yield("document-ready")
 
-//        Index.init();
+        //        Index.init();
 
 //        Index.initJQVMAP(); // init index page's custom scripts
 

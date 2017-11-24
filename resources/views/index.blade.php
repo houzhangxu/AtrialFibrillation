@@ -64,16 +64,22 @@
                     <div class="clearfix">
 
                         <div class="btn-group">
-                            <a href="javascript:;" id="btnAdd" class="btn green btn-sm table-button">
-                                <i class="icon-plus icon-white"></i> 添加 </a>
-                            <a href="{{ url("/import") }}" id="" class="btn blue btn-sm table-button" target="_blank">
-                                <i class="icon-white icon-arrow-up"></i> 导入 </a>
-                            <a href="{{ url("/export") }}" id="" class="btn blue btn-sm table-button purple" target="_blank">
-                                <i class="icon-white icon-arrow-down"></i> 导出 </a>
+                            @if(auth()->user()->can('新增病人') || auth()->user()->can('普通权限'))
+                                <a href="javascript:;" id="btnAdd" class="btn green btn-sm table-button">
+                                    <i class="icon-plus icon-white"></i> 添加 </a>
+                            @endif
+                            @if(auth()->user()->can('导入') || auth()->user()->can('普通权限'))
+                                    <a href="{{ url("/import") }}" id="" class="btn blue btn-sm table-button" target="_blank">
+                                        <i class="icon-white icon-arrow-up"></i> 导入 </a>
+                            @endif
+                            @if(auth()->user()->can('导出') || auth()->user()->can('普通权限'))
+                                    <a href="{{ url("/export") }}" id="" class="btn blue btn-sm table-button purple" target="_blank">
+                                        <i class="icon-white icon-arrow-down"></i> 导出 </a>
+                            @endif
                         </div>
                     </div>
 
-                    <table class="table table-striped table-hover table-bordered" id="data-tables">
+                    <table class="table table-striped table-hover table-bordered" id="data-tables" style="width: 100%">
                     </table>
 
                 </div>
@@ -87,8 +93,6 @@
     </div>
 
     <!-- END PAGE CONTENT -->
-
-    </div>
 @stop
 
 @section("document-ready")
@@ -115,7 +119,11 @@
                     { "mData": "name","sTitle": "姓名",  "sDefaultContent": "无", "bSortable": true,
                         "mRender": function(data, type, full){
                             //alert(type);
-                            return '<a href="{{ url("/family") }}?uid='+full.id+'&id_card='+full.id_card+'">'+data+'</a>';
+                            @if(auth()->user()->can('病人信息二级页面') || auth()->user()->can('普通权限'))
+                                return '<a href="{{ url("/family") }}?uid='+full.id+'&id_card='+full.id_card+'">'+data+'</a>';
+                            @else
+                                return data;
+                            @endif
                         }
                     },
                     { "mData": "id_card","sTitle": "身份证",  "sDefaultContent": "无", "bSortable": true },
@@ -135,14 +143,22 @@
                         "bSortable": false,
                         "sWidth":"100px",
                         "mRender": function(data, type, full) {
+                            var htmlCode = "";
 
-                            var htmlCode = "<a href=\"javascript:void(0)\" "
+                            @if(auth()->user()->can('浏览病人详细信息') || auth()->user()->can('普通权限'))
+                                htmlCode += "<a href=\"javascript:void(0)\" "
                                 + "onclick=\"detailRecord('" +full.id + "');\"><i class='fa fa-info'></i> 详情</a>";
+                            @endif
 
-                            htmlCode += " <a href=\"javascript:void(0)\" "
+                            @if(auth()->user()->can('修改病人') || auth()->user()->can('普通权限'))
+                                htmlCode += " <a href=\"javascript:void(0)\" "
                                 + "onclick=\"editRecord('" + full.id + "');\"><i class='fa fa-pencil'></i> 编辑</a>";
-                            htmlCode += " <a href=\"javascript:void(0)\" "
+                            @endif
+
+                            @if(auth()->user()->can('删除病人') || auth()->user()->can('普通权限'))
+                                htmlCode += " <a href=\"javascript:void(0)\" "
                                 + "onclick=\"del('" + full.id + "');\"><i class='fa fa-pencil'></i> 删除</a>";
+                            @endif
 
                             return htmlCode;
                         }
@@ -153,6 +169,8 @@
                 "bAutoWidth":true,  //表格宽度自适应
                 "bServerSide":true, //开启服务器请求模式
                 "bSort" : true, //是否启动各个字段的排序功能
+                "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示
+                "bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {

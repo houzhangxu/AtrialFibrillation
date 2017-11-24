@@ -16,10 +16,6 @@ Route::get('/', function () {
 });
 */
 
-Route::get("/login",function (){
-    return "I am login.";
-});
-
 Route::group(["prefix"=>"account","middleware"=>["web"]],function (){
 
     //使用facade进行数据的增删改查
@@ -84,20 +80,25 @@ Route::get("/test",["as"=>"/test","uses"=>"TestController@index"]);
 
 
 //网站整体路由
-Route::group(["middleware"=>["web"]],function (){
+Route::get("/login",["as"=>"login","uses"=>"Auth\LoginController@login"]);
+
+Route::group(["middleware"=>["web","auth"]],function (){
 
     Route::get("/",["as"=>"/","uses"=>"PatientInfoController@index"]);
+    Route::get('/home', 'PatientInfoController@index')->name('home');
     Route::get("/index",["as"=>"index","uses"=>"PatientInfoController@index"]);
     Route::any("/option/{clazz}/{name}/{key?}",["uses"=>"AdminController@option"]);
 
-    Route::group(["prefix"=>"patient"],function (){
+    Route::group(["prefix"=>"patient"],function (){     //病人信息
         Route::get("/",["uses"=>"PatientInfoController@index"]);
         Route::any("/record.data",["uses"=>"PatientInfoController@record"]);
-        Route::any("/create","PatientInfoController@create");            //创建页面与添加数据请求
-        Route::any("/delete","PatientInfoController@delete");            //前端控制删除
-        Route::any("/update/{id}","PatientInfoController@update");       //前端控制修改
-        Route::any("/detail/{id}","PatientInfoController@detail");       //前端控制详情
+        Route::any("/create","PatientInfoController@create")->middleware("permission:最高权限|普通权限|新增病人");            //创建页面与添加数据请求
+        Route::any("/delete","PatientInfoController@delete")->middleware("permission:最高权限|普通权限|删除病人");            //前端控制删除
+        Route::any("/update/{id}","PatientInfoController@update")->middleware("permission:最高权限|普通权限|修改病人");       //前端控制修改
+        Route::any("/detail/{id}","PatientInfoController@detail")->middleware("permission:最高权限|普通权限|浏览病人详细信息");       //前端控制详情
     });
+
+    Route::group(["middleware"=>["permission:普通权限|病人信息二级页面"]],function (){
 
     //家庭史
     Route::group(["prefix"=>"family"],function (){
@@ -264,11 +265,57 @@ Route::group(["middleware"=>["web"]],function (){
         Route::any("/option/{name}/{key?}","RelapseController@option");
     });
 
+    });
+
     //Excel导入导出
-    Route::get("import","ExcelController@import");
-    Route::get("export","ExcelController@export");
+    Route::get("import","ExcelController@import")->middleware("permission:最高权限|普通权限|导入");
+    Route::get("export","ExcelController@export")->middleware("permission:最高权限|普通权限|导出");
     Route::get("export1","ExcelController@export1");
     Route::get("excelv","ExcelController@view");
 
+
+    //测试权限
+    Route::get("permission","AccountController@permission");
+
+
+    //后台管理
+    Route::group(["prefix"=>"admin","middleware"=>["role:超级管理员"]],function (){
+        Route::any("/","Admin\AdminController@index")->name("admin");
+
+        Route::group(["prefix"=>"user"],function (){    //用户管理
+            Route::get("/","Admin\UserController@index")->name("admin.user.index");
+            Route::any("/record.data",["uses"=>"Admin\UserController@record"]);
+            Route::any("/create","Admin\UserController@create");
+            Route::any("/update/{id}","Admin\UserController@update");
+            Route::any("/detail/{id}","Admin\UserController@detail");
+            Route::any("/reset/{id}","Admin\UserController@reset");
+        });
+
+        Route::group(["prefix"=>"role"],function (){    //角色管理
+            Route::get("/","Admin\RoleController@index")->name("admin.role.index");
+            Route::any("/record.data",["uses"=>"Admin\RoleController@record"]);
+            Route::any("/create","Admin\RoleController@create");
+            Route::any("/update/{id}","Admin\RoleController@update");
+            Route::any("/detail/{id}","Admin\RoleController@detail");
+            Route::any("/delete","Admin\RoleController@delete");
+            Route::any("/list","Admin\RoleController@getAllRoles")->name("admin.role.list");
+        });
+
+        Route::group(["prefix"=>"permissions"],function (){    //权限管理
+            Route::get("/","Admin\PermissionsController@index")->name("admin.permissions.index");
+            Route::any("/record.data",["uses"=>"Admin\PermissionsController@record"]);
+            Route::any("/create","Admin\PermissionsController@create");
+            Route::any("/update/{id}","Admin\PermissionsController@update");
+            Route::any("/detail/{id}","Admin\PermissionsController@detail");
+            Route::any("/delete","Admin\PermissionsController@delete");
+            Route::any("/list","Admin\PermissionsController@getAllPermissions")->name("admin.permissions.list");
+        });
+
+    });
+
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home1');
 

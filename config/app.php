@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        //表格
         Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
@@ -176,6 +177,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        //权限认证
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

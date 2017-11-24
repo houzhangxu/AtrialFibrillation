@@ -10,9 +10,12 @@ namespace App\Http\Controllers;
 
 
 use App\Account;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AccountController extends Controller
 {
@@ -462,6 +465,60 @@ class AccountController extends Controller
         return view("account.update",[
             "account"=>$account
         ]);
+    }
+
+    public function permission(){
+        $user = User::find(1);
+//        $user->givePermissionTo("search articles");   //给用户赋予一个权限
+//        $user->assignRole("writer");  //给用户指派一个角色
+
+        $role = Role::findByName("writer"); //获取名为writer的角色
+//        $role->givePermissionTo("show articles"); //给角色赋予一个权限
+
+        var_dump($user->hasRole('writer'));                     //判断用户是否具有某个角色
+        $user->hasAnyRole(Role::all());         //用户具有任何一个角色就判定成功
+        $user->hasAllRoles(Role::all());        //用户具有所有的角色才算成功
+        $user->hasPermissionTo('edit articles');    //用户具有某一个权限
+        $user->hasAnyPermission(['edit articles', 'publish articles', 'unpublish articles']);   //用户具有任意一个权限
+        var_dump($user->can("search articles"));                //用户是否具有某个权限
+        var_dump($role->hasPermissionTo("edit articles"));      //判断角色是否具有某个权限
+        $user->hasDirectPermission('delete articles');  //判断用户是否直接具有某个权限
+
+
+
+        //$user->removeRole('writer');                    //将用户的角色去除
+        //$user->revokePermissionTo('edit articles');     //将用户的权限去除
+
+        //$role->revokePermissionTo('edit articles');     //将角色的权限去除
+
+//        $user->syncPermissions(['edit articles', 'delete articles']);       //同步权限,将旧的权限去除替换为新的权限
+//        $user->syncRoles(['writer', 'admin']);          //同步角色,将用户旧的角色去除替换为新的权限
+
+
+
+        //创建角色与权限
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'delete articles']);
+
+        //创建权限
+//        Permission::create(['name' => 'delete articles']);
+//        Permission::create(['name' => 'search articles']);
+//        Permission::create(['name' => 'show articles']);
+//        Permission::create(['name' => 'update articles']);
+
+        //获取用户的角色与权限
+        $permissions = $user->permissions;      //获取用户直接继承来的权限
+        $RolePer = $user->getPermissionsViaRoles(); //获取用户从角色继承过来的权限
+        $perAndRole = $user->getAllPermissions();   //获取属于这个用户的所有权限,包括从角色继承过来的
+        $roles = $user->getRoleNames();         //获取用户的角色名
+
+//        dump($role);
+//        dump($permission);
+        dump($user);
+        dump($permissions);
+        dump($RolePer);
+        dump($perAndRole);
+        dump($roles);
     }
 
 }
