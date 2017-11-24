@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
     public function index(){
-        return "Admin index";
+        return redirect()->route("admin.user.index");
     }
 
 }
