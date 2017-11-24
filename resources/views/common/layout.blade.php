@@ -148,8 +148,6 @@
                         @can("最高权限")
                             <li><a href="{{ route("admin") }}"><i class="icon-lock"></i> 后台管理</a></li>
                         @endcan
-
-
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="icon-key"></i> Log Out</a></li>
                     </ul>
