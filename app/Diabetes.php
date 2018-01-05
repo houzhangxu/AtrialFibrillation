@@ -15,7 +15,7 @@ class Diabetes extends BaseModel
     protected $table = "diabetes";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","diabetes","medical_history","fasting_plasma_glucose","HbA1","HbA1C","metformin",
+    protected $fillable = ["id_card","diabetes","medical_history","fasting_plasma_glucose","HbA1","HbA1C","metformin",
         "glimepiride","acarbose", "coronary_artery_stenosis", "statin","aspirin","polivy"];
 
     protected $DIABETES = [    //糖尿病

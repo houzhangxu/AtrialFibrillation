@@ -17,13 +17,13 @@ class CoronaryHeartDiseaseController extends Controller
 {   //冠心病控制器
 
     public function index(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
-        $form =  CoronaryHeartDisease::where("pid",$id)->first();  //根据id查询病人冠心病
+        $id_card = $request->input("id_card",0);     //获取链接中的id,病人id
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id查询病人基础信息
+        $form =  CoronaryHeartDisease::where("id_card",$id_card)->first();  //根据id查询病人冠心病
 
         if($form == null){
             $form = new CoronaryHeartDisease();
-            $form["pid"] = $id;
+            $form["id_card"] = $id_card;
         }
 
         return view("CoronaryHeartDisease.index",[
@@ -35,19 +35,18 @@ class CoronaryHeartDiseaseController extends Controller
     public function create(Request $request){
         if($request->isMethod("POST")){
             $form = $request->input("Form");
-            $pid = $form["pid"];
             $id_card = $form["id_card"];
 
             if(CoronaryHeartDisease::where("id_card",$id_card)->count()){
                 if(CoronaryHeartDisease::where("id_card",$id_card)->update($form)){
-                    return redirect("/CoronaryHeartDisease?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
+                    return redirect("/CoronaryHeartDisease?id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
                 }else{
                     return redirect()->back()->with("result",["code"=>0,"message"=>"修改失败!"]);
                 }
             }
 
             if(CoronaryHeartDisease::create($form)){
-                return redirect("/CoronaryHeartDisease?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
+                return redirect("/CoronaryHeartDisease?id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
             }else{
                 return redirect()->back()->with("result",["code"=>0,"message"=>"创建失败!"]);
             }

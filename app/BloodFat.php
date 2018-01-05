@@ -15,7 +15,7 @@ class BloodFat extends BaseModel
     protected $table = "blood_fat";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","triglyceride","cholesterol_total","high_density_lipoprotein",
+    protected $fillable = ["id_card","triglyceride","cholesterol_total","high_density_lipoprotein",
         "low_densith_lipoprotein", "very_low_density_lipoprotein","statin","dose","measure_time"];
 
     protected $STATIN = [   //他汀

@@ -15,7 +15,7 @@ class ReproductiveHormone extends BaseModel
     protected $table = "reproductive_hormone";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","testosterone","estradiol","follicule_stimulating_hormone",
+    protected $fillable = ["id_card","testosterone","estradiol","follicule_stimulating_hormone",
         "luteinizing_hormone","prolactin","progesterone"];
 
 }

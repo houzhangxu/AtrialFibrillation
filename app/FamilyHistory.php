@@ -16,7 +16,7 @@ class FamilyHistory extends BaseModel
 
     public $timestamps = true;   //维护时间戳
 
-    protected $fillable = ["id_card","pid","father","mother","brother","sisters","son","daughter"];
+    protected $fillable = ["id_card","father","mother","brother","sisters","son","daughter"];
 
     protected $DISEASE = [
         1=>"AF",

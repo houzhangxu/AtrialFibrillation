@@ -15,7 +15,7 @@ class Hypertension extends BaseModel
 
     public $timestamps = true;   //维护时间戳
 
-    protected $fillable = ["id_card","pid","hypertension",
+    protected $fillable = ["id_card","hypertension",
         "hypertension_year","maximum_systolic_blood_pressure",
         "peak_diastolic_pressure","CCB","B_BLOCKER",
         "type","type_dose","ACEI","ACEI_varieties","ARB","ARB_varieties","diuretic","other_hypotensor"]

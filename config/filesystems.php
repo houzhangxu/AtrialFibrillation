@@ -55,6 +55,11 @@ return [
             'visibility' => 'public',
         ],
 
+        'excels' => [
+            'driver' => 'local',
+            'root' => storage_path('app/excels'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

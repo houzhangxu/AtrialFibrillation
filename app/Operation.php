@@ -14,7 +14,7 @@ class Operation extends BaseModel
     protected $table = "operation";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","doctor","first_assistant","operation_mode","add_melt","operation_time",
+    protected $fillable = ["id_card","doctor","first_assistant","operation_mode","add_melt","operation_time",
         "efferent_block","pulmonary_vein","afferent_block","bleeding_volume","electric_repetition_rate","amiodaronum",
         "pericardial_tamponade","heparin", "fentanyl","intraoperative_vagal_reflex_hypotension","atropine","dopamine",
         "other_complications", "left_atrial_manometry_before_ablation","left_atrial_manometry_after_ablation",

@@ -15,7 +15,7 @@ class SmokeDrink extends BaseModel
 
     public $timestamps = true;   //维护时间戳
 
-    protected $fillable = ["id_card","pid","drink","drink_type","ml","year","drink_year","quit_drink","quit_drink_year","smoke","somke_few","smoke_year","quit_smoke","quit_smoke_year"];
+    protected $fillable = ["id_card","drink","drink_type","ml","year","drink_year","quit_drink","quit_drink_year","smoke","somke_few","smoke_year","quit_smoke","quit_smoke_year"];
 
     protected $DRINK = [    //是否喝酒
         1=>"是",

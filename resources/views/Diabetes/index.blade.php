@@ -52,7 +52,6 @@
                     <!-- BEGIN FORM-->
                     <form id="oForm" action="{{ url("Diabetes/create") }}" class="form-horizontal form-bordered form-label-stripped" method="post">
                         {{ csrf_field() }}
-                        <input type="hidden" name="Form[pid]" value="{{ $patient_info->id }}" />
                         <input type="hidden" name="Form[id_card]" value="{{ $patient_info->id_card }}" />
 
                         <div class="control-group">

@@ -15,7 +15,7 @@ class ThyroidFunctionMeasure extends BaseModel
     protected $table = "thyroid_function_measure";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","thyroxine","triiodothyronine","third_generation_thyroid_stimulating_hormone",
+    protected $fillable = ["id_card","thyroxine","triiodothyronine","third_generation_thyroid_stimulating_hormone",
         "free_thyroxine", "free_triiodothyronine","thyroid_peroxidase_antibody","measure_time"];
 
 }

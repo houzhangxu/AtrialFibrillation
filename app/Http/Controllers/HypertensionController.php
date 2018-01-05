@@ -19,13 +19,13 @@ class HypertensionController extends Controller
 {   //高血压控制器
 
     public function index(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
-        $form = Hypertension::where("pid",$id)->first();  //根据id查询病人家庭史
+        $id_card = $request->input("id_card",0);     //获取链接中的id,病人id_card
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
+        $form = Hypertension::where("id_card",$id_card)->first();  //根据id查询病人家庭史
 
         if($form == null){
             $form = new Hypertension();
-            $form["pid"] = $id;
+            $form["id_card"] = $id_card;
         }
 
         return view("hypertension.index",[
@@ -37,19 +37,18 @@ class HypertensionController extends Controller
     public function create(Request $request){
         if($request->isMethod("POST")){
             $form = $request->input("Form");
-            $pid = $form["pid"];
             $id_card = $form["id_card"];
 
             if(Hypertension::where("id_card",$id_card)->count()){
                 if(Hypertension::where("id_card",$id_card)->update($form)){
-                    return redirect("/hypertension?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
+                    return redirect("/hypertension?id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
                 }else{
                     return redirect()->back()->with("result",["code"=>0,"message"=>"修改失败!"]);
                 }
             }
 
             if(Hypertension::create($form)){
-                return redirect("/hypertension?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
+                return redirect("/hypertension?id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
             }else{
                 return redirect()->back()->with("result",["code"=>0,"message"=>"创建失败!"]);
             }
@@ -67,9 +66,8 @@ class HypertensionController extends Controller
     }
 
     public function measure(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
         $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id查询病人基础信息
         $measures = HypertensionMeasure::where("id_card",$id_card)->get();
 
         return view("hypertension.measure",[
@@ -96,9 +94,8 @@ class HypertensionController extends Controller
             return $data;
         }
 
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
-        $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id_card
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
         $measures = HypertensionMeasure::where("id_card",$id_card)->get();
 
         return view("hypertension.measure_create",[
@@ -115,7 +112,7 @@ class HypertensionController extends Controller
             $measure = $request->input("Measure");
             $measure["measure_time"] = strtotime($measure["measure_time"]);
 
-            if(HypertensionMeasure::where("id",$id)->update($measur)){
+            if(HypertensionMeasure::where("id",$id)->update($measure)){
                 $data["code"] = 1;
                 $data["message"] = "修改成功";
                 Session::flash("result",$data);

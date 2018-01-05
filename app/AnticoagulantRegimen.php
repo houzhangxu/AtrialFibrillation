@@ -15,7 +15,7 @@ class AnticoagulantRegimen extends BaseModel
     protected $table = "anticoagulant_regimen";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","anti_freezing",
+    protected $fillable = ["id_card","anti_freezing",
         "xarelto_dose","CHADS2","CHA2DS2_VASC", "HASBLED"];
 
     protected $ANTI_FREEZING = [    //抗凝方案

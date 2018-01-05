@@ -173,7 +173,7 @@
             $('#btnAdd').on('click', function(){
                 // create the backdrop and wait for next modal to be triggered
                 Hmodal.dialog({
-                    url: "{{ url("AtrialFibrillationBurden/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
+                    url: "{{ url("AtrialFibrillationBurden/measure/create?id_card=".Request::input("id_card")) }}",
                     title: "房颤负荷",
                     width: 800,
                     buttons: [

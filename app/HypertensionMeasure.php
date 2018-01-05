@@ -14,7 +14,7 @@ class HypertensionMeasure extends BaseModel
     protected $table = "hypertension_measure";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","systolic_pressure","diastolic_pressure","measure_time"];
+    protected $fillable = ["id_card","systolic_pressure","diastolic_pressure","measure_time"];
 
 
 

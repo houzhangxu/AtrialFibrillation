@@ -16,9 +16,8 @@ class AtrialFibrillationBurdenController extends Controller
 {   //房颤负荷控制器
 
     public function measure(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
         $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
         $measures = AtrialFibrillationBurdenMeasure::where("id_card",$id_card)->get();
 
         return view("AtrialFibrillationBurden.measure",[
@@ -45,9 +44,8 @@ class AtrialFibrillationBurdenController extends Controller
             return $data;
         }
 
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
         $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
         $measure = new AtrialFibrillationBurdenMeasure();
 
         return view("AtrialFibrillationBurden.measure_create",[

@@ -268,7 +268,9 @@ Route::group(["middleware"=>["web","auth"]],function (){
     });
 
     //Excel导入导出
-    Route::get("import","ExcelController@import")->middleware("permission:最高权限|普通权限|导入");
+    Route::any("import","ExcelController@import")->middleware("permission:最高权限|普通权限|导入");
+    Route::any("importTest","ExcelController@importTest")->middleware("permission:最高权限|普通权限|导入");
+    Route::any("importInsert","ExcelController@importInsert")->middleware("permission:最高权限|普通权限|导入");
     Route::get("export","ExcelController@export")->middleware("permission:最高权限|普通权限|导出");
     Route::get("export1","ExcelController@export1");
     Route::get("excelv","ExcelController@view");
@@ -309,6 +311,27 @@ Route::group(["middleware"=>["web","auth"]],function (){
             Route::any("/detail/{id}","Admin\PermissionsController@detail");
             Route::any("/delete","Admin\PermissionsController@delete");
             Route::any("/list","Admin\PermissionsController@getAllPermissions")->name("admin.permissions.list");
+        });
+
+        Route::group(["prefix"=>"model"],function (){    //模块管理
+            Route::get("/","Admin\ModelManagerController@index")->name("admin.model.index");
+            Route::any("/record/{pid?}",["uses"=>"Admin\ModelManagerController@record"]);
+            Route::any("/create/{pid?}","Admin\ModelManagerController@create");
+            Route::any("/update/{id}","Admin\ModelManagerController@update");
+            Route::any("/detail/{id}","Admin\ModelManagerController@detail");
+            Route::any("/delete","Admin\ModelManagerController@delete");
+            Route::any("/re","Admin\ModelManagerController@re");
+            Route::any("/tree/{pid?}","Admin\ModelManagerController@getChildren");
+            Route::any("/tree1/{pid?}","Admin\ModelManagerController@testTree");
+        });
+
+        Route::group(["prefix"=>"cae"],function (){    //中英文对照表
+            Route::get("/","Admin\CAEController@index")->name("admin.cae.index");
+            Route::any("/record.data",["uses"=>"Admin\CAEController@record"]);
+            Route::any("/create","Admin\CAEController@create");
+            Route::any("/update/{id}","Admin\CAEController@update");
+            Route::any("/detail/{id}","Admin\CAEController@detail");
+            Route::any("/delete","Admin\CAEController@delete");
         });
 
     });

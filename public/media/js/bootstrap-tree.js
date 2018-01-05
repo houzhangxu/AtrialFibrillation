@@ -24,7 +24,7 @@
 
   "use strict"; // jshint ;_;
 
-  var loading = "<img src='assets/plugins/bootstrap-tree/bootstrap-tree/img/ajax-loader.gif' class='indicator' /> Loading ...";
+  var loading = " Loading ...";
 
   /* TREE CLASS DEFINITION
    * ========================= */
@@ -85,26 +85,25 @@
         delete data.href
         delete data.callback
 
-        $.post(options.href, data, function (d, s, x){
+        $.get(options.href, data, function (d, s, x){
           
           var doc, type = "html"
-            
           if (options.callback) { // If a callback was defined in the data parameters
-            
             var cb = window[options.callback].apply(el, [d, s, x]) // callbacks must return an object with 'doc' and 'type' keys
             doc = cb.doc || d
             type = cb.type || type
-            
           } else {
-            
+              // console.log(d)
             try {
               doc = $.parseJSON(d)
+                // console.log(doc)
               type = "json"
             } catch (err) {
               doc = d
             }
             
             if (type !== "json") {
+                // console.log("no json");
               try {
                 doc = $.parseXML(d)
                 type = "xml"
@@ -139,12 +138,14 @@
     }
     
     , _createNodes: function (nodes) {
-      
+
       var els = []
         , $this = $(this)
-      
+
+          // console.log(nodes);
       $.each(nodes, function (ind, el) {
-        
+          // console.log(ind);
+        // console.log(el);
         var node = $("<li>")
           , role = (el.leaf) ? "leaf" : "branch"
           , attributes = {}
@@ -231,7 +232,8 @@
       
       var nodes = []
         , $this = $(this)
-      
+      // console.log("DOC:");
+      // console.log(doc);
       $.each(doc, function (ind, el) {
         
         var opts = {}
@@ -405,23 +407,30 @@
     $("body").on("click.tree.data-api", "[data-toggle=branch]", function (e) {
       
       e.preventDefault()
-      
+
       var $this = $(this)
         , target = $this.next(".branch")
         , href = $this.attr("href")
         , option = $(target).data("tree") ? "toggle" : $this.data()
-        
+
+        /*
+      console.log(target)
+      console.log($(target).data("tree"))
+      console.log(option)
+      */
       href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
       
       if (!target.length) {
         target = $('<ul>').addClass('branch').append("<li>" + loading + "</li>").insertAfter($this)
       }
-      
-      option.parent = $this
-      option.href = (href !== "#") ? href : undefined
-          
+
+      if(option != "toggle"){
+          option.parent = $this
+          option.href = (href !== "#") ? href : undefined
+      }
+
       $(target).tree(option)
-      
+
       return false
     })
     

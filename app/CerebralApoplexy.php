@@ -15,7 +15,7 @@ class CerebralApoplexy extends BaseModel
     protected $table = "cerebral_apoplexy";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","cerebral_apoplexy","medical_history","MRI_ischemic_focus","position",
+    protected $fillable = ["id_card","cerebral_apoplexy","medical_history","MRI_ischemic_focus","position",
         "num", "gyrus_width_increase","ventriculomegaly","carotid_atherosclerotic_plaque","patch_size","intracranial_vascular_stenosis"];
 
     protected $CEREBRAL_APOPLEXY = [    //脑卒中史

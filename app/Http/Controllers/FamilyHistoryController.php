@@ -17,13 +17,13 @@ class FamilyHistoryController extends Controller
 {   //家族史控制器
 
     public function index(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
-        $family = FamilyHistory::where("pid",$id)->first();  //根据id查询病人家庭史
+        $id_card = $request->input("id_card",0);     //获取链接中的id,病人id
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id查询病人基础信息
+        $family = FamilyHistory::where("id_card",$id_card)->first();  //根据id查询病人家庭史
 
         if($family == null){
             $family = new FamilyHistory();
-            $family["pid"] = $id;
+            $family["id_card"] = $id_card;
         }
 
         return view("family.index",[
@@ -35,19 +35,18 @@ class FamilyHistoryController extends Controller
     public function create(Request $request){
         if($request->isMethod("POST")){
             $family = $request->input("Family");
-            $pid = $family["pid"];
             $id_card = $family["id_card"];
 
             if(FamilyHistory::where("id_card",$id_card)->count()){
                 if(FamilyHistory::where("id_card",$id_card)->update($family)){
-                    return redirect("/family?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
+                    return redirect("/family?id_card=".$id_card)->with("result",["code"=>1,"message"=>"修改成功!"]);
                 }else{
                     return redirect()->back()->with("result",["code"=>0,"message"=>"修改失败!"]);
                 }
             }
 
             if(FamilyHistory::create($family)){
-                return redirect("/family?uid=".$pid."&id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
+                return redirect("/family?id_card=".$id_card)->with("result",["code"=>1,"message"=>"创建成功!"]);
             }else{
                 return redirect()->back()->with("result",["code"=>0,"message"=>"创建失败!"]);
             }

@@ -16,9 +16,8 @@ class BloodFatController extends Controller
 {   //血脂
 
     public function measure(Request $request){
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
         $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
         $measures = BloodFat::where("id_card",$id_card)->get();
 
         return view("BloodFat.measure",[
@@ -45,9 +44,8 @@ class BloodFatController extends Controller
             return $data;
         }
 
-        $id = $request->input("uid",0);     //获取链接中的id,病人id
         $id_card = $request->input("id_card",0);     //获取链接中的身份证,病人id
-        $patient_info = PatientInfo::find($id);         //根据id查询病人基础信息
+        $patient_info = PatientInfo::where("id_card",$id_card)->first();         //根据id_card查询病人基础信息
         $measure = new BloodFat();
 
         return view("BloodFat.measure_create",[

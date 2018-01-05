@@ -15,7 +15,7 @@ class ArrhythmicDrugsMeasure extends BaseModel
     protected $table = "arrhythmic_drugs_measure";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","amiodaronum","propafenone","zok","dose","measure_time"];
+    protected $fillable = ["id_card","amiodaronum","propafenone","zok","dose","measure_time"];
 
     protected $ZOK = [    //美托洛尔缓释片
         0=>"无",

@@ -15,7 +15,7 @@ class HepaticInsufficiencyMeasure extends BaseModel
     protected $table = "hepatic_insufficiency_measure";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","total_protein","albumin","globulin","globulin_proportion","glutamic_pyruvic_transaminase","aspartate_transaminase",
+    protected $fillable = ["id_card","total_protein","albumin","globulin","globulin_proportion","glutamic_pyruvic_transaminase","aspartate_transaminase",
         "total_bilirubin","bilirubin_direct","indirect_bilirubin","hepatinica","measure_time"];
 
     protected $HEPATINICA = [   //护肝药

@@ -293,7 +293,7 @@
             $('#btnAdd').on('click', function(){
                 // create the backdrop and wait for next modal to be triggered
                 Hmodal.dialog({
-                    url: "{{ url("RenalInadequacy/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
+                    url: "{{ url("RenalInadequacy/measure/create?id_card=".Request::input("id_card")) }}",
                     title: "肾功能不全",
                     width: 800,
                     buttons: [

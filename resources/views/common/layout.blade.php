@@ -198,118 +198,30 @@
             <li>
                 <div style="margin-top:5px;"></div>
             </li>
+            @foreach($modelSide as $key => $item)
+            <li class="{{ $item["id"] == $sideID ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
 
-            <li class="{{ !strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
+                    <a href="javascript:;">
 
-                <a href="javascript:;">
+                        <i class="icon-file-text"></i>
 
-                    <i class="icon-file-text"></i>
+                        <span class="title">{{$item["name"]}}</span>
 
-                    <span class="title">@yield("patient-name")</span>
+                        <span class="arrow {{ $item["id"] == $sideID ? "open" : "" }}"></span>
 
-                    <span class="arrow open"></span>
-
-                </a>
-
-                <ul class="sub-menu"><!-- 二级菜单 -->
-
-                    <li class="{{ Request::getPathInfo() == "/family" ?"active" : "" }}">
-                        <a href="{{ url("/family?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >家族史</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/sd" ?"active" : "" }}">
-                        <a href="{{ url("/sd?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >抽烟喝酒</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/hypertension" ?"active" : "" }}">
-                        <a href="{{ url("/hypertension?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">高血压</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/CoronaryHeartDisease" ?"active" : "" }}">
-                        <a href="{{ url("/CoronaryHeartDisease?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">冠心病</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/CerebralApoplexy" ?"active" : "" }}">
-                        <a href="{{ url("/CerebralApoplexy?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">脑卒中</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/AnticoagulantRegimen" ?"active" : "" }}">
-                        <a href="{{ url("/AnticoagulantRegimen?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}">抗凝方案</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Diabetes" ?"active" : "" }}">
-                        <a href="{{ url("/Diabetes?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >糖尿病</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ReproductiveHormone" ?"active" : "" }}">
-                        <a href="{{ url("/ReproductiveHormone?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >生殖激素</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/BNP" ?"active" : "" }}">
-                        <a href="{{ url("/BNP?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >BNP</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Operation" ?"active" : "" }}">
-                        <a href="{{ url("/Operation?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >手术参数</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/HospitalizationExpenses" ?"active" : "" }}">
-                        <a href="{{ url("/HospitalizationExpenses?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >住院费用</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/Relapse" ?"active" : "" }}">
-                        <a href="{{ url("/Relapse?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >房颤复发情况</a>
-                    </li>
-
-                </ul>
+                    </a>
+                    @if(count($item["item"]) != 0)
+                    <ul class="sub-menu">
+                        @foreach($item["item"] as $key => $t)
+                            <li class="{{ Request::getPathInfo() == $t["route"] ?"active" : "" }}">
+                                <a href="{{ url($t["route"]."?id_card=".Request::input("id_card",0)) }}" >{{ $t["name"] }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    @endif
 
             </li>
-
-            <li class="{{ strstr(Request::getPathInfo(),"measure") ? "active" : "" }}"><!-- 侧边栏单个选择项 -->
-
-                <a href="javascript:;">
-
-                    <i class="icon-file-text"></i>
-
-                    <span class="title">随访</span>
-
-                    <span class="arrow"></span>
-
-                </a>
-
-                <ul class="sub-menu"><!-- 二级菜单 -->
-
-                    <li class="{{ Request::getPathInfo() == "/hypertension/measure" ?"active" : "" }}">
-                        <a href="{{ url("/hypertension/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >高血压</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ArrhythmicDrugs/measure" ?"active" : "" }}">
-                        <a href="{{ url("/ArrhythmicDrugs/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >心律失常药物</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/AtrialFibrillationBurden/measure" ?"active" : "" }}">
-                        <a href="{{ url("/AtrialFibrillationBurden/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >房颤负荷</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/RenalInadequacy/measure" ?"active" : "" }}">
-                        <a href="{{ url("/RenalInadequacy/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >肾功能不全</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/ThyroidFunction/measure" ?"active" : "" }}">
-                        <a href="{{ url("/ThyroidFunction/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >甲状腺功能</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/HepaticInsufficiency/measure" ?"active" : "" }}">
-                        <a href="{{ url("/HepaticInsufficiency/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >肝功能不全</a>
-                    </li>
-
-                    <li class="{{ Request::getPathInfo() == "/BloodFat/measure" ?"active" : "" }}">
-                        <a href="{{ url("/BloodFat/measure?uid=".Request::input("uid",0)."&id_card=".Request::input("id_card",0)) }}" >血脂</a>
-                    </li>
-
-                </ul>
-
-            </li>
+            @endforeach
 
         </ul>
 

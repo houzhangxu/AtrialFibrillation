@@ -11,12 +11,145 @@ namespace App\Http\Controllers;
 use App\FamilyHistory;
 use App\PatientInfo;
 use Excel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ExcelController extends Controller
 {   //Excel
 
-    public function import(){
+    public function import(Request $request){
+
+        if($request->isMethod("POST")){
+//            var_dump($_FILES);
+            $file = $request->file("file");
+           // dump($file);
+            $originalName = $file->getClientOriginalName();     //源文件名
+            $extensionName = $file->getClientOriginalExtension();   //扩展名
+            $type = $file->getClientMimeType();                 //获取文件的类型
+            $realPath = $file->getRealPath();                   //临时绝对路径
+
+            $filename = date("Y-m-d-H-i-s") . '_' .uniqid() . '.' . $extensionName;
+            //($filename);
+            $bool = Storage::disk("excels")->put($filename,file_get_contents($realPath));
+            //dump($filename);
+
+            if($bool){
+                //dump(storage_path("excels")) ."\\". $filename;
+//                $excel = "storage\\app\\excels". '\\' .iconv('UTF-8', 'GBK//IGNORE', $filename) ;
+                $excel = "storage\\app\\excels". '\\' . $filename;
+                Excel::load($excel,function ($reader){
+                    $data = $reader->all();
+                    dump($data);
+                });
+            }
+
+            return view("import.state",[
+                "state"=>$bool
+            ]);
+        }
+
+        return view("import.index");
+    }
+
+    public function importTest(){
+        $excel = "storage\\app\\excels". '\\' . "2017-12-19-06-12-58_5a38adeadad62.xls";
+        Excel::load($excel,function ($reader){
+            $reader->setDateColumns(array(
+                'admission_time'
+            ))->get();
+
+            $data = $reader->all();
+            dump($data);
+
+            $data1 = $reader->get();
+            dump($data1);
+
+            $data3 = $reader->get()->groupBy("");
+            dump($data3);
+
+            $data4 = $reader->first();
+            dump($data4);
+            dump($data4->first());
+            dump($data4->getTitle());
+
+
+            // Get workbook title
+            $workbookTitle = $reader->getTitle();
+            dump($workbookTitle);
+
+            foreach($reader->get() as $sheet)
+            {
+                // get sheet title
+//                dump($sheet);
+                $sheetTitle = $sheet->getTitle();
+//                dump($sheetTitle);
+            }
+
+            /*
+            $row10 = $reader->takeRows(4)->get();
+            dump($row10);
+            $col0 = $reader->takeColumns(4)->get();
+            dump($col0);
+            */
+
+            dump($reader->toArray());
+            dump($reader->toObject());
+
+
+            $reader->each(function($sheet) {
+
+                dump($sheet);
+                // Loop through all rows
+                $sheet->each(function($row) {
+                });
+
+            });
+
+        });
+
+    }
+
+    public function importInsert(){
+        $excel = "storage\\app\\excels". '\\' . "2017-12-19-06-12-58_5a38adeadad62.xls";
+        Excel::load($excel,function ($reader){
+
+            $reader->each(function($sheet) {
+
+                $title = $sheet->getTitle();
+
+                switch($title){
+                    case "一般情况":
+                        foreach ($sheet as $key => $row){
+                            $sheet[$key]["admission_time"] = strtotime($row["admission_time"]);
+                            $sheet[$key]["birth_date"] = strtotime($row["birth_date"]);
+                        }
+                        dump($sheet);
+                        PatientInfo::insert($sheet->toArray());
+                        break;
+                }
+
+            });
+
+
+        });
+    }
+
+
+    public function main(){ //我是主函数
+        $number1 = 11; //假装从键盘获取了数字
+        $number2 = -11; //假装从键盘获取了数字
+
+        $this->calc($number1,$number2);  //把获取的数字传入自定义的函数
+
+        return 0;
+    }
+
+    public function calc($number1,$number2){ //我是自定义的函数
+        $sum =abs($number1) + abs($number2);    //计算和
+        $sub =abs($number1) - abs($number2);    //计算差
+
+        print("和:" . $sum . ",差:" . $sub);     //输出
 
     }
 
@@ -61,10 +194,10 @@ class ExcelController extends Controller
             "MOCA as MOCA评分"
         )->orderBy("入组时间","desc")
             ->get();
-
         foreach ($patientinfos as $patientinfo){    //对从数据库中取出的数据进行处理
             $patientinfo["入组时间"] = isset($patientinfo["入组时间"]) ? date("Y-m-d",$patientinfo["入组时间"]) : "";
             $patientinfo["出生年月"] = isset($patientinfo["出生年月"]) ? date("Y-m-d",$patientinfo["出生年月"]) : "";
+            $patientinfo["身份证"] = "=\"".$patientinfo["身份证"]."\"";
         }
 
         //家庭史
@@ -79,6 +212,9 @@ class ExcelController extends Controller
             "daughter as 女儿"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($familys as $key => $item){    //对从数据库中取出的数据进行处理
+            $item->身份证 = "=\"".$item->身份证."\"";
+        }
 
         //抽烟喝酒
         $sds = DB::table("patient_info as p")->leftJoin("smoke_drink as t","p.id","t.pid")->select(
@@ -97,7 +233,9 @@ class ExcelController extends Controller
             "quit_smoke_year"
         )->orderBy("p.admission_time","desc")
             ->get();
-
+        foreach ($sds as $item){    //对从数据库中取出的数据进行处理
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //高血压
         $hypertensions = DB::table("patient_info as p")->leftJoin("hypertension as t","p.id","t.pid")->select(
@@ -119,6 +257,9 @@ class ExcelController extends Controller
             "other_hypotensor"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($hypertensions as $item){    //对从数据库中取出的数据进行处理
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //冠心病
         $chds = DB::table("patient_info as p")->leftJoin("coronary_heart_disease as t","p.id","t.pid")->select(
@@ -132,8 +273,9 @@ class ExcelController extends Controller
             "polivy"
         )->orderBy("p.admission_time","desc")
             ->get();
-
-
+        foreach ($chds as $item){    //对从数据库中取出的数据进行处理
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //脑卒中
         $cps = DB::table("patient_info as p")->leftJoin("cerebral_apoplexy as t","p.id","t.pid")->select(
@@ -151,7 +293,9 @@ class ExcelController extends Controller
             "intracranial_vascular_stenosis"
         )->orderBy("p.admission_time","desc")
             ->get();
-
+        foreach ($cps as $item){    //对从数据库中取出的数据进行处理
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //抗凝方案
         $ars = DB::table("patient_info as p")->leftJoin("anticoagulant_regimen as t","p.id","t.pid")->select(
@@ -164,6 +308,9 @@ class ExcelController extends Controller
             "HASBLED"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($ars as $item){    //对从数据库中取出的数据进行处理
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //心律失常药物 测量
         $adms = DB::table("patient_info as p")->join("arrhythmic_drugs_measure as t","p.id","t.pid")->select(
@@ -178,6 +325,7 @@ class ExcelController extends Controller
             ->get();
         foreach ($adms as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
 
         //房颤负荷 测量
@@ -193,6 +341,7 @@ class ExcelController extends Controller
             ->get();
         foreach ($afbms as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
 
         //糖尿病
@@ -209,6 +358,9 @@ class ExcelController extends Controller
             "acarbose"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($diabeteses as $item){
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //肾功能不全 测量
         $rims = DB::table("patient_info as p")->join("renal_inadequacy_measure as t","p.id","t.pid")->select(
@@ -231,6 +383,7 @@ class ExcelController extends Controller
 
         foreach ($rims as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
 
 
@@ -250,6 +403,7 @@ class ExcelController extends Controller
 
         foreach ($tfms as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
 
 
@@ -272,6 +426,7 @@ class ExcelController extends Controller
             ->get();
         foreach ($his as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
 
 
@@ -287,6 +442,9 @@ class ExcelController extends Controller
             "progesterone"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($rhs as $item){
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //BNP等
         $bnps = DB::table("patient_info as p")->leftJoin("bnp as t","p.id","t.pid")->select(
@@ -299,6 +457,10 @@ class ExcelController extends Controller
             "CRP"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($bnps as $item){
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
+
 
         //血脂 测量
         $blood_fats = DB::table("patient_info as p")->join("blood_fat as t","p.id","t.pid")->select(
@@ -316,8 +478,8 @@ class ExcelController extends Controller
             ->get();
         foreach ($blood_fats as $item){
             $item->measure_time = isset($item->measure_time) ? date("Y-m-d H:i",$item->measure_time) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
-
 
         //手术参数
         $operations = DB::table("patient_info as p")->leftJoin("operation as t","p.id","t.pid")->select(
@@ -347,6 +509,9 @@ class ExcelController extends Controller
             "left_atrial_manometry_sinus"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($operations as $item){
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
         //住院费用参数
         $hps = DB::table("patient_info as p")->leftJoin("hospitalization_expenses as t","p.id","t.pid")->select(
@@ -370,6 +535,9 @@ class ExcelController extends Controller
             "medical_insurance_where"
         )->orderBy("p.admission_time","desc")
             ->get();
+        foreach ($operations as $item){
+            $item->id_card = "=\"".$item->id_card."\"";
+        }
 
 
         //房颤复发情况
@@ -392,8 +560,8 @@ class ExcelController extends Controller
             ->get();
         foreach ($relapses as $item){
             $item->relapse_date = isset($item->relapse_date) ? date("Y-m-d H:i",$item->relapse_date) : "";
+            $item->id_card = "=\"".$item->id_card."\"";
         }
-
 
         Excel::create('病人信息',function($excel) use ($patientinfos,$familys,$sds,$hypertensions,$chds,$cps,$ars,$adms,$afbms,$diabeteses,$rims,$tfms,$his,$rhs,$bnps,$blood_fats,$operations,$hps,$relapses){  //创建excel
             $excel->sheet("一般情况", function($sheet) use ($patientinfos){    //创建excel中的一个表格

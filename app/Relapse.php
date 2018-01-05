@@ -15,7 +15,7 @@ class Relapse extends BaseModel
     protected $table = "relapse";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","relapse_date","duration","stop_method", "write_manual",
+    protected $fillable = ["id_card","relapse_date","duration","stop_method", "write_manual",
         "blood_pressure_load", "mean_blood_pressure","average_heart_rate","heart_rate_lt_60","heart_rate_gte_61_lte_70",
         "heart_rate_gte_71_lte_80","heart_rate_gte_81_lte_90","heart_rate_gt_91"
     ];

@@ -207,7 +207,7 @@
             $('#btnAdd').on('click', function(){
                 // create the backdrop and wait for next modal to be triggered
                 Hmodal.dialog({
-                    url: "{{ url("ThyroidFunction/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
+                    url: "{{ url("ThyroidFunction/measure/create?id_card=".Request::input("id_card")) }}",
                     title: "甲状腺功能",
                     width: 800,
                     buttons: [

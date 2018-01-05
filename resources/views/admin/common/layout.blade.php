@@ -259,6 +259,14 @@
                         <li class="{{ Request::getPathInfo() == "/admin/permissions" ?"active" : "" }}">
                             <a href="{{ route("admin.permissions.index") }}">权限管理</a>
                         </li>
+                        <li class="{{ Request::getPathInfo() == "/admin/model" ?"active" : "" }}">
+                            <a href="{{ route("admin.model.index") }}">模块管理</a>
+                        </li>
+                        <!--
+                        <li class="{{ Request::getPathInfo() == "/admin/cae" ?"active" : "" }}">
+                            <a href="{{ route("admin.cae.index") }}">中英文字段对照表</a>
+                        </li>
+                        -->
                     </ul>
 
                 </li>

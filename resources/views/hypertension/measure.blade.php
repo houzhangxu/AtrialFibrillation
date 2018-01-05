@@ -137,7 +137,7 @@
             $('#btnAdd').on('click', function(){
                 // create the backdrop and wait for next modal to be triggered
                 Hmodal.dialog({
-                    url: "{{ url("hypertension/measure/create?uid=".Request::input("uid")."&id_card=".Request::input("id_card")) }}",
+                    url: "{{ url("hypertension/measure/create?id_card=".Request::input("id_card")) }}",
                     title: "高血压测量",
                     width: 800,
                     buttons: [

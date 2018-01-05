@@ -15,7 +15,7 @@ class BNP extends BaseModel
     protected $table = "bnp";   //指定表名
     protected $primaryKey = "id";   //指定主键
 
-    protected $fillable = ["id_card","pid","bnp","TNI",
+    protected $fillable = ["id_card","bnp","TNI",
         "CK","CK_MB","CRP"];
 
 }

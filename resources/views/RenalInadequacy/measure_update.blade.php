@@ -2,7 +2,6 @@
     <h3 class="form-section">肾功能不全测量</h3>
 
     {{ csrf_field() }}
-    <input type="hidden" name="Measure[pid]" value="{{ $patient_info->id }}" />
     <input type="hidden" name="Measure[id_card]" value="{{ $patient_info->id_card }}" />
 
     <div class="row-fluid">
