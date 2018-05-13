@@ -201,7 +201,7 @@ class ExcelController extends Controller
         }
 
         //家庭史
-        $familys = DB::table("patient_info as p")->leftJoin("family_history as t","p.id","t.pid")->select(
+        $familys = DB::table("patient_info as p")->leftJoin("family_history as t","p.id_card","t.id_card")->select(
             "p.name as 姓名",
             "p.id_card as 身份证",
             "father as 父亲",
@@ -217,7 +217,7 @@ class ExcelController extends Controller
         }
 
         //抽烟喝酒
-        $sds = DB::table("patient_info as p")->leftJoin("smoke_drink as t","p.id","t.pid")->select(
+        $sds = DB::table("patient_info as p")->leftJoin("smoke_drink as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "drink",
@@ -238,7 +238,7 @@ class ExcelController extends Controller
         }
 
         //高血压
-        $hypertensions = DB::table("patient_info as p")->leftJoin("hypertension as t","p.id","t.pid")->select(
+        $hypertensions = DB::table("patient_info as p")->leftJoin("hypertension as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "hypertension",
@@ -262,7 +262,7 @@ class ExcelController extends Controller
         }
 
         //冠心病
-        $chds = DB::table("patient_info as p")->leftJoin("coronary_heart_disease as t","p.id","t.pid")->select(
+        $chds = DB::table("patient_info as p")->leftJoin("coronary_heart_disease as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "coronary_heart_disease",
@@ -278,7 +278,7 @@ class ExcelController extends Controller
         }
 
         //脑卒中
-        $cps = DB::table("patient_info as p")->leftJoin("cerebral_apoplexy as t","p.id","t.pid")->select(
+        $cps = DB::table("patient_info as p")->leftJoin("cerebral_apoplexy as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "cerebral_apoplexy",
@@ -298,7 +298,7 @@ class ExcelController extends Controller
         }
 
         //抗凝方案
-        $ars = DB::table("patient_info as p")->leftJoin("anticoagulant_regimen as t","p.id","t.pid")->select(
+        $ars = DB::table("patient_info as p")->leftJoin("anticoagulant_regimen as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "anti_freezing",
@@ -313,7 +313,7 @@ class ExcelController extends Controller
         }
 
         //心律失常药物 测量
-        $adms = DB::table("patient_info as p")->join("arrhythmic_drugs_measure as t","p.id","t.pid")->select(
+        $adms = DB::table("patient_info as p")->join("arrhythmic_drugs_measure as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "amiodaronum",
@@ -329,7 +329,7 @@ class ExcelController extends Controller
         }
 
         //房颤负荷 测量
-        $afbms = DB::table("patient_info as p")->join("atrial_fibrillation_burden_measure as t","p.id","t.pid")->select(
+        $afbms = DB::table("patient_info as p")->join("atrial_fibrillation_burden_measure as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "load_hour",
@@ -345,7 +345,7 @@ class ExcelController extends Controller
         }
 
         //糖尿病
-        $diabeteses = DB::table("patient_info as p")->leftJoin("diabetes as t","p.id","t.pid")->select(
+        $diabeteses = DB::table("patient_info as p")->leftJoin("diabetes as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "diabetes",
@@ -363,7 +363,7 @@ class ExcelController extends Controller
         }
 
         //肾功能不全 测量
-        $rims = DB::table("patient_info as p")->join("renal_inadequacy_measure as t","p.id","t.pid")->select(
+        $rims = DB::table("patient_info as p")->join("renal_inadequacy_measure as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "serum_creatinine",
@@ -388,7 +388,7 @@ class ExcelController extends Controller
 
 
         //甲状腺功能 测量
-        $tfms = DB::table("patient_info as p")->join("thyroid_function_measure as t","p.id","t.pid")->select(
+        $tfms = DB::table("patient_info as p")->join("thyroid_function_measure as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "thyroxine",
@@ -408,7 +408,7 @@ class ExcelController extends Controller
 
 
         //肝功能不全 测量
-        $his = DB::table("patient_info as p")->join("hepatic_insufficiency_measure as t","p.id","t.pid")->select(
+        $his = DB::table("patient_info as p")->join("hepatic_insufficiency_measure as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "total_protein",
@@ -431,7 +431,7 @@ class ExcelController extends Controller
 
 
         //生殖激素
-        $rhs = DB::table("patient_info as p")->leftJoin("reproductive_hormone as t","p.id","t.pid")->select(
+        $rhs = DB::table("patient_info as p")->leftJoin("reproductive_hormone as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "testosterone",
@@ -447,7 +447,7 @@ class ExcelController extends Controller
         }
 
         //BNP等
-        $bnps = DB::table("patient_info as p")->leftJoin("bnp as t","p.id","t.pid")->select(
+        $bnps = DB::table("patient_info as p")->leftJoin("bnp as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "bnp",
@@ -463,7 +463,7 @@ class ExcelController extends Controller
 
 
         //血脂 测量
-        $blood_fats = DB::table("patient_info as p")->join("blood_fat as t","p.id","t.pid")->select(
+        $blood_fats = DB::table("patient_info as p")->join("blood_fat as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "triglyceride",
@@ -482,7 +482,7 @@ class ExcelController extends Controller
         }
 
         //手术参数
-        $operations = DB::table("patient_info as p")->leftJoin("operation as t","p.id","t.pid")->select(
+        $operations = DB::table("patient_info as p")->leftJoin("operation as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "doctor",
@@ -514,7 +514,7 @@ class ExcelController extends Controller
         }
 
         //住院费用参数
-        $hps = DB::table("patient_info as p")->leftJoin("hospitalization_expenses as t","p.id","t.pid")->select(
+        $hps = DB::table("patient_info as p")->leftJoin("hospitalization_expenses as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "cost",
@@ -541,7 +541,7 @@ class ExcelController extends Controller
 
 
         //房颤复发情况
-        $relapses = DB::table("patient_info as p")->leftJoin("relapse as t","p.id","t.pid")->select(
+        $relapses = DB::table("patient_info as p")->leftJoin("relapse as t","p.id_card","t.id_card")->select(
             "p.name",
             "p.id_card",
             "relapse_date",
@@ -717,7 +717,7 @@ class ExcelController extends Controller
     }
 
     public function view(){
-        $f = DB::table("patient_info as p")->leftJoin("family_history as f","p.id","f.pid")->select("p.id as id","p.id_card as 身份证","f.father as father")->get();
+        $f = DB::table("patient_info as p")->leftJoin("family_history as f","p.id_card","f.pid")->select("p.id as id","p.id_card as 身份证","f.father as father")->get();
 
         $table = $this->formatTable($f);
         dump($table);
@@ -725,12 +725,12 @@ class ExcelController extends Controller
     }
 
     public function formatTable($c,$keyNmaes = null){
-        if(empty($c)){
-            return $c;
+        if($c->isEmpty()){
+            $temp[] = $keyNmaes;
+            return $temp;
         }
 
         $keys = array_keys(get_object_vars($c[0]));
-
 
         if($keyNmaes == null){
             $table[] = $keys;
@@ -745,7 +745,6 @@ class ExcelController extends Controller
             }
             $table[] = $t;
         }
-
         return $table;
     }
 

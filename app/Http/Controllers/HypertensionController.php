@@ -115,8 +115,9 @@ class HypertensionController extends Controller
             if(HypertensionMeasure::where("id",$id)->update($measure)){
                 $data["code"] = 1;
                 $data["message"] = "修改成功";
-                Session::flash("result",$data);
+
             }
+            Session::flash("result",$data);
 
             return $data;
         }

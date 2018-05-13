@@ -64,6 +64,7 @@ class UserController extends Controller
         $data["iTotalDisplayRecords"] = $count;
         $data["iTotalRecords"] = count($users);
         $data["aaData"] = $users;
+        //return e(json_encode($data));
         return $data;
     }
 

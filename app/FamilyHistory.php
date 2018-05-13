@@ -26,7 +26,9 @@ class FamilyHistory extends BaseModel
         5=>"糖尿病",
     ];
 
-
-
+    //关系
+    public function patient(){
+        return $this->belongsTo('App\PatientInfo','id_card','id_card');
+    }
 
 }

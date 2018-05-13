@@ -259,7 +259,6 @@
             Hmodal.select2({
                 id:"#drink_type",
                 url:"{{ url("/sd/option/DRINK_TYPE") }}",
-
             });
 
             var oForm = Hmodal.form({

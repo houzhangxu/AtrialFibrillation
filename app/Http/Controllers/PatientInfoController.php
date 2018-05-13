@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\FamilyHistory;
 use App\PatientInfo;
 use Illuminate\Http\Request;
 
@@ -54,8 +55,8 @@ class PatientInfoController extends Controller
         $data["iTotalDisplayRecords"] = $count;
         $data["iTotalRecords"] = count($patient_infos);
         $data["aaData"] = $patient_infos;
-        return $data;
 
+        return $data;
     }
 
     public function create(Request $request){
@@ -83,8 +84,10 @@ class PatientInfoController extends Controller
     public function delete(Request $request){
         $data["message"] = "删除失败";
         $data["code"] = "0";
+
         if($request->has("ids") && $request->input("ids") != ""){
-            if (PatientInfo::destroy($request->input("ids"))){
+            if (PatientInfo::find($request->input("ids"))->delete()){
+                //PatientInfo::destroy($request->input("ids"))
                 $data["message"] = "删除成功";
                 $data["code"] = "1";
             }
@@ -120,6 +123,14 @@ class PatientInfoController extends Controller
         return view("patient_info.update",[
             "patient_info"=>$patient_info
         ]);
+    }
+
+    public function test(){
+        $fam = PatientInfo::find(1)->family;
+        dump($fam);
+
+        $pat = FamilyHistory::find(5)->patient;
+        dump($pat);
     }
 
 }

@@ -1,4 +1,5 @@
 var Hmodal = function (){
+
     var dialog = function (config){
         $('body').modalmanager('loading');
         var url = config.url;
@@ -38,6 +39,7 @@ var Hmodal = function (){
         return $modal;
 
     };
+
     var formD = function (a) {
         function b(e) {
             if (typeof e.id != "string") {

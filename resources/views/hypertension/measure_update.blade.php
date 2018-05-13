@@ -6,7 +6,7 @@
 
 <div class="row-fluid">
 
-    <dic class="span6">
+    <div class="span6">
         <div class="control-group">
 
             <label class="control-label">姓名</label>
@@ -17,7 +17,7 @@
 
             </div>
         </div>
-    </dic>
+    </div>
 
     <div class="span6 ">
 

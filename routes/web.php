@@ -87,6 +87,7 @@ Route::group(["middleware"=>["web","auth"]],function (){
     Route::get("/",["as"=>"/","uses"=>"PatientInfoController@index"]);
     Route::get('/home', 'PatientInfoController@index')->name('home');
     Route::get("/index",["as"=>"index","uses"=>"PatientInfoController@index"]);
+    Route::get("/index1",["uses"=>"PatientInfoController@index"]);
     Route::any("/option/{clazz}/{name}/{key?}",["uses"=>"AdminController@option"]);
 
     Route::group(["prefix"=>"patient"],function (){     //病人信息
@@ -114,6 +115,13 @@ Route::group(["middleware"=>["web","auth"]],function (){
         Route::any("/option/{name}/{key?}","SmokeDrinkController@option");
     });
 
+    //喝酒模块
+    Route::group(["prefix"=>"drink"],function(){
+        Route::any("/","DrinkController@index");
+        Route::post("/create","DrinkController@create");
+        Route::any("/option/{name}/{key?}","DrinkController@option");
+    });
+
     //高血压
     Route::group(["prefix"=>"hypertension"],function (){
         Route::any("/","HypertensionController@index");
@@ -128,6 +136,16 @@ Route::group(["middleware"=>["web","auth"]],function (){
             Route::any("/delete","HypertensionController@measureDelete");
         });
 
+    });
+
+    Route::group(["prefix"=>"body"],function(){ //身体模块
+
+        Route::group(["prefix"=>"measure"],function(){  //身体测量模块
+            Route::get("/","BodyMeasureController@index");
+            Route::any("/create","BodyMeasureController@create");
+            Route::any("/update/{id}","BodyMeasureController@update");
+            Route::get("/delete","BodyMeasureController@delete");
+        });
     });
 
     //冠心病
@@ -334,6 +352,15 @@ Route::group(["middleware"=>["web","auth"]],function (){
             Route::any("/delete","Admin\CAEController@delete");
         });
 
+        Route::group(["prefix"=>"stu"],function (){     //学生管理
+            Route::get("/","Admin\StudentController@index")->name("admin.stu.index");
+            Route::get("record.data",["uses"=>"Admin\StudentController@record"]);
+            Route::any("/create","Admin\StudentController@create");
+            Route::get("/detail/{id}","Admin\StudentController@detail");
+            Route::any("/update/{id}","Admin\StudentController@update");
+            Route::get("/delete","Admin\StudentController@delete");
+        });
+
     });
 
 });
@@ -342,3 +369,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home1');
 
+Route::any("/relative","PatientInfoController@test");
